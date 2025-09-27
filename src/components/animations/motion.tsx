@@ -64,18 +64,19 @@ export const menuStaggerContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.02,
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
     },
   },
 };
 
+// Each item fade + slide up
 export const menuStaggerItem: Variants = {
-  hidden: { opacity: 0, y: -8 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.36, ease: "easeOut" },
+    transition: { duration: 0.3, ease: "easeOut" },
   },
 };
 
@@ -104,10 +105,10 @@ export const rotateIn: Variants = {
 
 // Fade in + slide from top (good for dropdowns / menus)
 export const fadeInDown: Variants = {
-  hidden: { opacity: 0, y: -40 },
+  hidden: { opacity: 0, y: -20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.3, ease: "easeOut" },
   },
 };

@@ -85,52 +85,49 @@ const Navbar = () => {
           exit="hidden"
         >
           <motion.ul
-            className="w-full flex flex-col items-center gap-8 bg-[#1C1C1C] border border-[#262626] rounded-xl py-3.5"
+            className="w-full flex flex-col items-center gap-4 bg-[#1C1C1C] border border-[#262626] rounded-2xl py-6 shadow-xl px-8"
             variants={menuStaggerContainer}
             initial="hidden"
             animate="visible"
           >
-            <motion.li
-              variants={menuStaggerItem}
-              className="w-full text-center"
-            >
-              <Link to="/">Home</Link>
-            </motion.li>
+            {[
+              { id: "home", label: "Home", link: "/" },
+              { id: "careers", label: "Careers", link: "/careers" },
+              { id: "about", label: "About", link: "/about" },
+              { id: "security", label: "Security", link: "/security" },
+              { id: "login", label: "Login", link: "/login" },
+              { id: "signup", label: "Signup", link: "/signup" },
+            ].map((item) => (
+              <motion.li
+                key={item.id}
+                variants={menuStaggerItem}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full text-center relative px-4 py-2 cursor-pointer"
+                onClick={() => {
+                  setActiveLink(item.id);
+                  setIsOpen(false);
+                }}
+              >
+                {activeLink === item.id && (
+                  <motion.div
+                    layoutId="mobileActiveBackground"
+                    className="absolute inset-0 rounded-xl bg-[#262626]"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
 
-            <motion.li
-              variants={menuStaggerItem}
-              className="w-full text-center"
-            >
-              <Link to="/careers">Careers</Link>
-            </motion.li>
-
-            <motion.li
-              variants={menuStaggerItem}
-              className="w-full text-center"
-            >
-              <Link to="/about">About</Link>
-            </motion.li>
-
-            <motion.li
-              variants={menuStaggerItem}
-              className="w-full text-center"
-            >
-              <Link to="/security">Security</Link>
-            </motion.li>
-
-            <motion.li
-              variants={menuStaggerItem}
-              className="w-full text-center"
-            >
-              <Link to="/login">Login</Link>
-            </motion.li>
-
-            <motion.li
-              variants={menuStaggerItem}
-              className="w-full text-center"
-            >
-              <Link to="/signup">Signup</Link>
-            </motion.li>
+                <motion.span
+                  animate={{
+                    color: activeLink === item.id ? "#FFFFFF" : "#A1A1AA",
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="relative font-medium text-lg z-10"
+                >
+                  <Link to={item.link}>{item.label}</Link>
+                </motion.span>
+              </motion.li>
+            ))}
           </motion.ul>
         </motion.div>
       )}
