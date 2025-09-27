@@ -12,10 +12,33 @@ import {
 import { iconToggle } from "../animations/motion";
 import { useState } from "react";
 
+const links = [
+  {
+    id: "home",
+    label: "Home",
+    linkto: "/",
+  },
+  {
+    id: "careers",
+    label: "Careers",
+    linkto: "/careers",
+  },
+  {
+    id: "about",
+    label: "About",
+    linkto: "/about",
+  },
+  {
+    id: "security",
+    label: "Security",
+    linkto: "/security",
+  },
+];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => setIsOpen((prev) => !prev);
+  const [activeLink, setActiveLink] = useState("home");
 
   return (
     <motion.nav
@@ -24,7 +47,7 @@ const Navbar = () => {
       initial="hidden"
       animate="visible"
     >
-      <div className="relative py-3.5 pl-6 pr-3.5 bg-[#1C1C1C] rounded-full flex items-center justify-between border border-[#262626]">
+      <div className="relative py-3.5 pl-6 pr-3.5 bg-[#1C1C1C] rounded-full flex items-center justify-between border border-[#262626] shadow-lg lg:hidden">
         <motion.div variants={staggerItem} className="flex items-center gap-2">
           <img
             src="/images/logo.svg"
@@ -111,6 +134,38 @@ const Navbar = () => {
           </motion.ul>
         </motion.div>
       )}
+
+      <motion.div className="hidden lg:flex py-3.5 px-6 bg-[#1C1C1C] rounded-full  items-center justify-between border border-[#262626] shadow-lg" variants={staggerContainer}>
+        <motion.div className="flex items-center gap-2" variants={staggerItem}>
+          <img
+            src="/images/logo.svg"
+            alt="Logo Image"
+            className="w-[26px] h-[26px]"
+          />
+          <h3>YourBank</h3>
+        </motion.div>
+        <motion.ul className="flex items-center gap-[26px]">
+          {links.map((link) => (
+            <motion.li variants={staggerItem} className={`px-[18px] py-2.5 rounded-[82px] ${
+              activeLink === link.id ? "bg-[#262626]" : ""
+            }`} key={link.id} onClick={()=>setActiveLink(link.id)}>
+              <Link to={link.linkto} className="font-normal text-sm">
+                {link.label}
+              </Link>
+            </motion.li>
+          ))}
+        </motion.ul>
+        <div className="flex items-center gap-5">
+          <Link to="/signup">
+            <motion.button variants={staggerItem} className="font-normal text-sm">Sign Up</motion.button>
+          </Link>
+          <Link to="/login">
+            <motion.button variants={staggerItem} className="px-6 py-3 rounded-[82px] bg-[#CAFF33] font-normal text-black text-sm">
+              Login
+            </motion.button>
+          </Link>
+        </div>
+      </motion.div>
     </motion.nav>
   );
 };

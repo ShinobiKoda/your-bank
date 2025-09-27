@@ -41,21 +41,22 @@ export const scaleIn: Variants = {
 };
 
 export const staggerContainer: Variants = {
-  hidden: {},
+  hidden: { opacity: 0 },
   visible: {
+    opacity: 1,
     transition: {
-      staggerChildren: 0.4, // delay between children
+      staggerChildren: 0.15, 
+      delayChildren: 0.2,  
     },
   },
 };
 
-// Item fade for staggered lists
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.2, ease: "easeOut" },
+    transition: { duration: 0.4, ease: "easeOut" },
   },
 };
 
