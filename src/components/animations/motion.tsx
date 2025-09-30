@@ -103,7 +103,6 @@ export const rotateIn: Variants = {
   },
 };
 
-// Fade in + slide from top (good for dropdowns / menus)
 export const fadeInDown: Variants = {
   hidden: { opacity: 0, y: -20 },
   visible: {

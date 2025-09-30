@@ -41,7 +41,7 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState("home");
 
   return (
-    <nav className="w-full px-4 pt-10 lg:pt-[30px] lg:px-[80px] max-w-[1596px] mx-auto">
+    <nav className="w-full px-4 pt-10 lg:pt-[30px] lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -135,6 +135,8 @@ const Navbar = () => {
       <motion.div
         className="hidden lg:flex py-3.5 px-6 bg-[#1C1C1C] rounded-full  items-center justify-between border border-[#262626] shadow-lg"
         variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
       >
         <motion.div className="flex items-center gap-2" variants={staggerItem}>
           <img
@@ -146,8 +148,8 @@ const Navbar = () => {
         </motion.div>
         <div className="flex items-center gap-[26px] relative">
           {links.map((link) => (
-            <Link
-              to={link.linkto}
+            <motion.button
+              variants={staggerItem}
               key={link.id}
               className="relative px-[18px] py-2.5 rounded-[82px] cursor-pointer"
               onClick={() => setActiveLink(link.id)}
@@ -168,7 +170,7 @@ const Navbar = () => {
               >
                 <Link to={link.linkto}>{link.label}</Link>
               </motion.span>
-            </Link>
+            </motion.button>
           ))}
         </div>
         <div className="flex items-center gap-5">
