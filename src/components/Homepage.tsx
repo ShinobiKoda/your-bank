@@ -69,6 +69,25 @@ const Homepage = () => {
     },
   ];
 
+  // const useCases = [
+  //   {
+  //     image: "/images/checking-accounts.svg",
+  //     title: "Managing Personal Finances",
+  //   },
+  //   {
+  //     image: "/images/checking-accounts.svg",
+  //     title: "Saving for the Future",
+  //   },
+  //   {
+  //     image: "/images/checking-accounts.svg",
+  //     title: "Home Ownership",
+  //   },
+  //   {
+  //     image: "/images/checking-accounts.svg",
+  //     title: "Education Funding",
+  //   },
+  // ];
+
   const [activeTab, setActiveTab] = useState("individuals");
 
   return (
@@ -107,7 +126,7 @@ const Homepage = () => {
             variants={staggerItem}
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.98 }}
-            className="mt-[30px] font-normal text-sm px-6 py-3.5 bg-[#CAFF33] text-black rounded-[82px]"
+            className="mt-[30px] font-normal text-sm px-6 py-3.5 bg-[#CAFF33] text-black rounded-[82px] cursor-pointer"
           >
             Open Account
           </motion.button>
@@ -144,13 +163,13 @@ const Homepage = () => {
         </div>
       </section>
 
-      <section className="w-full mt-[69.37px] px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
+      <section className="w-full mt-[69.37px] lg:mt-[111.76px] px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
           <div className="flex flex-col max-w-[831px]">
-            <h2 className="font-medium text-[28px] text-center mb-2.5 lg:text-left">
+            <h2 className="font-medium text-[28px] lg:text-[38px] text-center mb-2.5 lg:text-left">
               Our <span className="text-[#CAFF33]">Products</span>
             </h2>
-            <p className="text-center lg:text-left font-light text-sm text-[#B3B3B3] mb-5">
+            <p className="text-center lg:text-left font-light text-sm lg:text-base text-[#B3B3B3] mb-5">
               Discover a range of comprehensive and customizable banking
               products at YourBank, designed to suit your unique financial needs
               and aspirations
@@ -162,7 +181,7 @@ const Homepage = () => {
                 <button
                   onClick={() => setActiveTab(tab.tab)}
                   key={index}
-                  className={`px-[18px] py-2.5 rounded-[140px] ${
+                  className={`px-[18px] py-2.5 rounded-[140px] cursor-pointer ${
                     activeTab === tab.tab
                       ? "bg-[#CAFF33] text-black"
                       : "text-white"
@@ -184,33 +203,52 @@ const Homepage = () => {
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"
-                className="w-full grid gap-[60px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                className="w-full grid gap-[60px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 "
               >
                 {items.map((item, index) => (
                   <motion.div
                     key={index}
                     variants={staggerItem}
-                    className="flex flex-col"
+                    className="flex flex-col lg:flex-row lg:items-center lg:gap-[30px]"
                   >
-                    <div className="w-full flex items-center justify-center mb-5">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="object-contain"
-                      />
+                    <div className="flex flex-col">
+                      <div className="w-full flex items-center justify-center mb-5">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="object-contain"
+                        />
+                      </div>
+                      <h3 className="font-normal text-xl text-center mb-3">
+                        {item.title}
+                      </h3>
+                      <p className="font-light text-sm lg:text-base text-[#B3B3B3] text-center leading-[150%]">
+                        {item.description}
+                      </p>
                     </div>
-                    <h3 className="font-normal text-xl text-center mb-3">
-                      {item.title}
-                    </h3>
-                    <p className="font-light text-sm text-[#B3B3B3] text-center leading-[150%]">
-                      {item.description}
-                    </p>
+                    {index !== items.length - 1 && (
+                      <hr className="w-full border-t border-[#262626] mt-[30px] lg:mt-0 lg:w-0 lg:h-full lg:border-t-0 lg:border-l lg:mx-auto lg:my-0" />
+                    )}
                   </motion.div>
                 ))}
               </motion.div>
             );
           })()}
         </div>
+      </section>
+
+      <section className="w-full mt-[80px] lg:mt-[120px] px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
+        <h2 className="text-center text-[#CAFF33] font-medium text-[28px] mb-2.5">
+          Use Cases
+        </h2>
+        <p className="font-light text-sm mb-[60px] text-center">
+          At YourBank, we cater to the diverse needs of individuals and
+          businesses alike, offering a wide range of financial solutions
+        </p>
+        <div
+          className="w-full bg-center bg-contain bg-no-repeat h-[370px]"
+          style={{ backgroundImage: "url('/images/use-cases-bg.svg')" }}
+        ></div>
       </section>
     </div>
   );
