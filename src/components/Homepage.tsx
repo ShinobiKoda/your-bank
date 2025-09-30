@@ -1,4 +1,5 @@
 import { HiCheckCircle } from "react-icons/hi2";
+import { useState } from "react";
 import { motion } from "motion/react";
 import {
   fadeInRight,
@@ -14,6 +15,61 @@ const Homepage = () => {
     "/images/currency-eth.svg",
     "/images/currency-euro.svg",
   ];
+
+  const tab = [
+    {
+      tab: "individuals",
+      label: "For Individuals",
+    },
+    {
+      tab: "businesses",
+      label: "For Businesses",
+    },
+  ];
+
+  const individualsTab = [
+    {
+      image: "/images/checking-accounts.svg",
+      title: "Checking Accounts",
+      description:
+        "Enjoy easy and convenient access to your funds with our range of checking account options. Benefit from features such as online and mobile banking, debit cards, and free ATM access.",
+    },
+    {
+      image: "/images/savings-account.svg",
+      title: "Savings Account",
+      description:
+        "Build your savings with our competitive interest rates and flexible savings account options. Whether you're saving for a specific goal or want to grow your wealth over time, we have the right account for you.",
+    },
+    {
+      image: "/images/loans-mortgages.svg",
+      title: "Loans and Mortages",
+      description:
+        "Realize your dreams with our flexible loan and mortgage options. From personal loans to home mortgages, our experienced loan officers are here to guide you through the application process and help you secure the funds you need.",
+    },
+  ];
+
+  const businessTab = [
+    {
+      image: "/images/checking-accounts.svg",
+      title: "Business Checking",
+      description:
+        "Manage day-to-day cash flow with business checking accounts built for companies of all sizes. Benefit from multiple user access, low fees, integrated payments, and fast ACH capabilities.",
+    },
+    {
+      image: "/images/savings-account.svg",
+      title: "Business Savings",
+      description:
+        "Grow your company's reserves with tiered interest rates, automated transfers, and cash-management tools that help you plan for payroll, taxes, and future investments.",
+    },
+    {
+      image: "/images/loans-mortgages.svg",
+      title: "Commercial Loans & Financing",
+      description:
+        "Access tailored financing — lines of credit, equipment loans, and commercial mortgages — with dedicated advisors to structure terms that support your growth and cash-flow needs.",
+    },
+  ];
+
+  const [activeTab, setActiveTab] = useState("individuals");
 
   return (
     <div className="w-full">
@@ -85,6 +141,75 @@ const Homepage = () => {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      <section className="w-full mt-[69.37px] px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
+          <div className="flex flex-col max-w-[831px]">
+            <h2 className="font-medium text-[28px] text-center mb-2.5 lg:text-left">
+              Our <span className="text-[#CAFF33]">Products</span>
+            </h2>
+            <p className="text-center lg:text-left font-light text-sm text-[#B3B3B3] mb-5">
+              Discover a range of comprehensive and customizable banking
+              products at YourBank, designed to suit your unique financial needs
+              and aspirations
+            </p>
+          </div>
+          <div className="w-full max-w-[320px] mx-auto">
+            <div className="w-full bg-[#1C1C1C] rounded-[82px] border border-[#262626] p-3 text-black text-center font-normal text-sm">
+              {tab.map((tab, index) => (
+                <button
+                  onClick={() => setActiveTab(tab.tab)}
+                  key={index}
+                  className={`px-[18px] py-2.5 rounded-[140px] ${
+                    activeTab === tab.tab
+                      ? "bg-[#CAFF33] text-black"
+                      : "text-white"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-[60px] lg:mt-[80px]">
+          {(() => {
+            const items =
+              activeTab === "individuals" ? individualsTab : businessTab;
+            return (
+              <motion.div
+                key={activeTab}
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                className="w-full grid gap-[60px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+              >
+                {items.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={staggerItem}
+                    className="flex flex-col"
+                  >
+                    <div className="w-full flex items-center justify-center mb-5">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="object-contain"
+                      />
+                    </div>
+                    <h3 className="font-normal text-xl text-center mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="font-light text-sm text-[#B3B3B3] text-center leading-[150%]">
+                      {item.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            );
+          })()}
         </div>
       </section>
     </div>
