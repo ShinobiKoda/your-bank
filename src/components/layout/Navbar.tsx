@@ -151,7 +151,7 @@ const Navbar = () => {
             <motion.button
               variants={staggerItem}
               key={link.id}
-              className="relative px-[18px] py-2.5 rounded-[82px] cursor-pointer"
+              className="relative px-[18px] py-2.5 rounded-[82px] cursor-pointer text-sm font-normal"
               onClick={() => setActiveLink(link.id)}
             >
               {activeLink === link.id && (
