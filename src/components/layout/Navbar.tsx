@@ -185,6 +185,8 @@ const Navbar = () => {
           <Link to="/login">
             <motion.button
               variants={staggerItem}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.98 }}
               className="px-6 py-3 rounded-[82px] bg-[#CAFF33] font-normal text-black text-sm cursor-pointer"
             >
               Login
