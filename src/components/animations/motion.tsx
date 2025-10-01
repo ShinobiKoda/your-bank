@@ -45,8 +45,8 @@ export const staggerContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15, 
-      delayChildren: 0.2,  
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
     },
   },
 };
@@ -110,4 +110,61 @@ export const fadeInDown: Variants = {
     y: 0,
     transition: { duration: 0.3, ease: "easeOut" },
   },
+};
+
+// Features section specific animations
+export const featuresContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+  },
+};
+
+export const featureTabsContainer: Variants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut", staggerChildren: 0.08 },
+  },
+};
+
+export const featureTabPill: Variants = {
+  hidden: { opacity: 0, y: 12, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.35, ease: "easeOut" },
+  },
+};
+
+export const featureCard: Variants = {
+  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
+
+export const featureCardHover: Variants = {
+  rest: { y: 0, scale: 1 },
+  hover: {
+    y: -4,
+    scale: 1.015,
+    transition: { duration: 0.25, ease: "easeOut" },
+  },
+};
+
+export const featureHighlight: Variants = {
+  initial: { opacity: 0, scale: 0.85 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.35, ease: "easeOut" },
+  },
+  exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
 };

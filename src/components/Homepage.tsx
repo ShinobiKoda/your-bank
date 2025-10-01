@@ -1,11 +1,16 @@
 import { HiCheckCircle } from "react-icons/hi2";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { ClimbingBoxLoader } from "react-spinners";
 import {
   fadeInRight,
   scaleIn,
   staggerContainer,
   staggerItem,
+  featuresContainer,
+  featureTabsContainer,
+  featureTabPill,
+  featureCard,
 } from "./animations/motion";
 import { GoArrowUpRight } from "react-icons/go";
 import { fetchHomepageData, type HomepageData } from "../api/Fetchdata";
@@ -17,18 +22,26 @@ const Homepage = () => {
 
   useEffect(() => {
     let mounted = true;
+    const MIN_LOADING_TIME = 3000; // ms
+    const start = performance.now();
+
     (async () => {
       try {
         const d = await fetchHomepageData();
-        if (mounted) {
-          setData(d);
-        }
+        if (mounted) setData(d);
       } catch {
         if (mounted) setError("Failed to load homepage data");
       } finally {
-        if (mounted) setLoading(false);
+        const elapsed = performance.now() - start;
+        const remaining = MIN_LOADING_TIME - elapsed;
+        const delay = remaining > 0 ? remaining : 0;
+        const timeout = setTimeout(() => {
+          if (mounted) setLoading(false);
+        }, delay);
+        if (!mounted) clearTimeout(timeout);
       }
     })();
+
     return () => {
       mounted = false;
     };
@@ -47,8 +60,13 @@ const Homepage = () => {
 
   if (loading) {
     return (
-      <div className="w-full flex items-center justify-center py-40">
-        <p className="text-sm text-[var(--grey-70)]">Loading content...</p>
+      <div
+        className="w-full h-screen flex items-center justify-center"
+        role="status"
+        aria-busy="true"
+        aria-label="Loading homepage content"
+      >
+        <ClimbingBoxLoader color="var(--green-60)" />
       </div>
     );
   }
@@ -473,29 +491,53 @@ const Homepage = () => {
             financial insights, all designed to enhance your banking experience
           </p>
         </div>
-        <div className="mt-[50px] space-y-5 lg:grid lg:grid-cols-[1fr_3fr] lg:items-start lg:gap-5">
-          <div className="w-full bg-[var(--grey-11)] rounded-[20px] p-5 lg:p-10 flex flex-row gap-5 overflow-x-scroll lg:overflow-hidden lg:flex-col">
-            {featureTabs.map((t) => (
-              <button
-                key={t.key}
-                onClick={() => setActiveFeatureTab(t.key)}
-                className={`rounded-[100px] min-w-[144px] text-nowrap px-5 py-3.5 border border-[var(--grey-15)] font-normal text-sm cursor-pointer transition-colors ${
-                  activeFeatureTab === t.key
-                    ? "bg-[var(--grey-10)] text-[var(--green-60)] ring-1 ring-[var(--green-60)]/40"
-                    : "bg-[var(--grey-10)] text-white/80 hover:text-white"
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
-          <div className="space-y-5 lg:grid lg:grid-cols-2 lg:gap-5">
+        <motion.div
+          variants={featuresContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.25 }}
+          className="mt-[50px] space-y-5 lg:grid lg:grid-cols-[1fr_3fr] lg:items-start lg:gap-5"
+        >
+          <motion.div
+            variants={featureTabsContainer}
+            className="w-full bg-[var(--grey-11)] rounded-[20px] p-5 lg:p-10 flex flex-row gap-5 overflow-x-scroll lg:overflow-hidden lg:flex-col"
+          >
+            {featureTabs.map((t) => {
+              const active = activeFeatureTab === t.key;
+              return (
+                <motion.button
+                  variants={featureTabPill}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  key={t.key}
+                  onClick={() => setActiveFeatureTab(t.key)}
+                  className={`relative rounded-[100px] min-w-[144px] text-nowrap px-5 py-3.5 border font-normal text-sm cursor-pointer transition-colors ${
+                    active
+                      ? "border-[var(--green-60)]/60 bg-[var(--grey-10)] text-[var(--green-60)]"
+                      : "border-[var(--grey-15)] bg-[var(--grey-10)] text-white/70 hover:text-white"
+                  }`}
+                >
+                  <span className="relative z-10">{t.label}</span>
+                </motion.button>
+              );
+            })}
+          </motion.div>
+          <motion.div
+            variants={featuresContainer}
+            className="space-y-5 lg:grid lg:grid-cols-2 lg:gap-5"
+          >
             {chunkFeatures(activeFeatures).map((col, colIndex) => (
-              <div key={colIndex} className="space-y-5">
+              <motion.div
+                key={colIndex}
+                className="space-y-5"
+                variants={staggerContainer}
+              >
                 {col.map((feature) => (
-                  <div
+                  <motion.div
                     key={feature.title}
-                    className="w-full p-[30px] space-y-5 rounded-[10px] bg-[var(--grey-11)] border border-[var(--grey-15)] lg:min-h-[227px] group hover:border-[var(--green-60)]/40 transition-colors"
+                    variants={featureCard}
+                    whileHover={{ y: -4, scale: 1.02 }}
+                    className="relative overflow-hidden w-full p-[30px] space-y-5 rounded-[14px] bg-[var(--grey-11)] border border-[var(--grey-15)] lg:min-h-[227px] group transition-colors hover:border-[var(--green-60)]/40"
                   >
                     <h3 className="w-full flex items-center justify-between font-normal text-lg">
                       <span>{feature.title}</span>
@@ -504,15 +546,22 @@ const Homepage = () => {
                         size={30}
                       />
                     </h3>
-                    <p className="font-light text-sm text-[var(--grey-70)]">
+                    <p className="font-light text-sm text-[var(--grey-70)] leading-[150%]">
                       {feature.description}
                     </p>
-                  </div>
+                    <span
+                      className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{
+                        background:
+                          "linear-gradient(120deg, rgba(132,255,164,0.07), rgba(132,255,164,0) 70%)",
+                      }}
+                    />
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
     </div>
   );
