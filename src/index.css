@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 @import "tailwindcss";
 
+:root{
+  --green-60: #CAFF33;
+  --grey-70: #B3B3B3;
+}
+
 body{
   background-color: #1A1A1A;
   color: white;

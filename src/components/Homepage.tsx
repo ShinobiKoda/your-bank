@@ -9,6 +9,25 @@ import {
 } from "./animations/motion";
 
 const Homepage = () => {
+  const useCases = [
+    {
+      image: "/images/checking-accounts.svg",
+      title: "Managing Personal Finances",
+    },
+    {
+      image: "/images/checking-accounts.svg",
+      title: "Saving for the Future",
+    },
+    {
+      image: "/images/checking-accounts.svg",
+      title: "Home Ownership",
+    },
+    {
+      image: "/images/checking-accounts.svg",
+      title: "Education Funding",
+    },
+  ];
+
   const supportedCurrencies = [
     "/images/currency-bitcoin.svg",
     "/images/currency-dollar.svg",
@@ -69,25 +88,6 @@ const Homepage = () => {
     },
   ];
 
-  // const useCases = [
-  //   {
-  //     image: "/images/checking-accounts.svg",
-  //     title: "Managing Personal Finances",
-  //   },
-  //   {
-  //     image: "/images/checking-accounts.svg",
-  //     title: "Saving for the Future",
-  //   },
-  //   {
-  //     image: "/images/checking-accounts.svg",
-  //     title: "Home Ownership",
-  //   },
-  //   {
-  //     image: "/images/checking-accounts.svg",
-  //     title: "Education Funding",
-  //   },
-  // ];
-
   const [activeTab, setActiveTab] = useState("individuals");
 
   return (
@@ -97,13 +97,14 @@ const Homepage = () => {
           className="flex flex-col items-center justify-center w-full lg:items-start lg:justify-start max-w-[825px]"
           variants={staggerContainer}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
         >
           <motion.p
             variants={staggerItem}
             className="pl-2 pr-4 py-2 bg-[#262626] font-light text-[12px] lg:text-sm flex items-center gap-0.5 rounded-[61px]"
           >
-            <HiCheckCircle className="text-[#CAFF33]" size={30} />
+            <HiCheckCircle className="text-[var(--green-60)]" size={30} />
             <span>No LLC Required, No Credit Check.</span>
           </motion.p>
           <motion.h2
@@ -111,7 +112,7 @@ const Homepage = () => {
             className="mt-[12px] font-medium text-[28px] lg:text-[38px] text-center lg:text-left"
           >
             Welcome to YourBank Empowering Your{" "}
-            <span className="text-[#CAFF33]">Financial Journey</span>
+            <span className="text-[var(--green-60)]">Financial Journey</span>
           </motion.h2>
           <motion.p
             variants={staggerItem}
@@ -126,7 +127,7 @@ const Homepage = () => {
             variants={staggerItem}
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.98 }}
-            className="mt-[30px] font-normal text-sm px-6 py-3.5 bg-[#CAFF33] text-black rounded-[82px] cursor-pointer"
+            className="mt-[30px] font-normal text-sm px-6 py-3.5 bg-[var(--green-60)] text-black rounded-[82px] cursor-pointer"
           >
             Open Account
           </motion.button>
@@ -135,7 +136,8 @@ const Homepage = () => {
           <motion.div
             variants={scaleIn}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
             className="w-full mt-[54.43px] lg:mt-0"
           >
             <img src="/images/cta-img.svg" alt="CTA Image" className="w-full" />
@@ -143,7 +145,8 @@ const Homepage = () => {
           <motion.div
             variants={fadeInRight}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
             className="w-full flex justify-end mt-3.5"
           >
             <div className="bg-[#22251B] pl-[12.31px] pr-[5.13px] py-[5.13px] flex items-center rounded-[41.02px] gap-1.5">
@@ -163,19 +166,31 @@ const Homepage = () => {
         </div>
       </section>
 
-      <section className="w-full mt-[69.37px] lg:mt-[111.76px] px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
-        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-          <div className="flex flex-col max-w-[831px]">
+      <motion.section className="w-full mt-[69.37px] lg:mt-[111.76px] px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          className="flex flex-col lg:flex-row lg:justify-between lg:items-center"
+        >
+          <motion.div
+            variants={staggerItem}
+            className="flex flex-col max-w-[831px]"
+          >
             <h2 className="font-medium text-[28px] lg:text-[38px] text-center mb-2.5 lg:text-left">
-              Our <span className="text-[#CAFF33]">Products</span>
+              Our <span className="text-[var(--green-60)]">Products</span>
             </h2>
-            <p className="text-center lg:text-left font-light text-sm lg:text-base text-[#B3B3B3] mb-5">
+            <p className="text-center lg:text-left font-light text-sm lg:text-base text-[var(--grey-70)] mb-5">
               Discover a range of comprehensive and customizable banking
               products at YourBank, designed to suit your unique financial needs
               and aspirations
             </p>
-          </div>
-          <div className="w-full max-w-[320px] mx-auto">
+          </motion.div>
+          <motion.div
+            variants={staggerItem}
+            className="w-full max-w-[320px] mx-auto"
+          >
             <div className="w-full bg-[#1C1C1C] rounded-[82px] border border-[#262626] p-3 text-black text-center font-normal text-sm">
               {tab.map((tab, index) => (
                 <button
@@ -183,7 +198,7 @@ const Homepage = () => {
                   key={index}
                   className={`px-[18px] py-2.5 rounded-[140px] cursor-pointer ${
                     activeTab === tab.tab
-                      ? "bg-[#CAFF33] text-black"
+                      ? "bg-[var(--green-60)] text-black"
                       : "text-white"
                   }`}
                 >
@@ -191,8 +206,8 @@ const Homepage = () => {
                 </button>
               ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         <div className="mt-[60px] lg:mt-[80px]">
           {(() => {
             const items =
@@ -202,7 +217,8 @@ const Homepage = () => {
                 key={activeTab}
                 variants={staggerContainer}
                 initial="hidden"
-                animate="visible"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
                 className="w-full grid gap-[60px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 "
               >
                 {items.map((item, index) => (
@@ -222,7 +238,7 @@ const Homepage = () => {
                       <h3 className="font-normal text-xl text-center mb-3">
                         {item.title}
                       </h3>
-                      <p className="font-light text-sm lg:text-base text-[#B3B3B3] text-center leading-[150%]">
+                      <p className="font-light text-sm lg:text-base text-[var(--grey-70)] text-center leading-[150%]">
                         {item.description}
                       </p>
                     </div>
@@ -235,20 +251,53 @@ const Homepage = () => {
             );
           })()}
         </div>
-      </section>
+      </motion.section>
 
       <section className="w-full mt-[80px] lg:mt-[120px] px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
-        <h2 className="text-center text-[#CAFF33] font-medium text-[28px] mb-2.5">
+        <h2 className="text-center text-[var(--green-60)] font-medium text-[28px] mb-2.5">
           Use Cases
         </h2>
-        <p className="font-light text-sm mb-[60px] text-center">
+        <p className="font-light text-sm mb-[60px] text-center text-[var(--grey-70)]">
           At YourBank, we cater to the diverse needs of individuals and
           businesses alike, offering a wide range of financial solutions
         </p>
         <div
-          className="w-full bg-center bg-contain bg-no-repeat h-[370px]"
+          className="w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5"
           style={{ backgroundImage: "url('/images/use-cases-bg.svg')" }}
-        ></div>
+        >
+          {useCases.map((use, index) => (
+            <div
+              key={index}
+              className="min-w-[54px] min-h-[160px] rounded-xl bg-[#1A1A1A] px-3.5 py-5 flex flex-col items-center justify-center gap-3.5"
+            >
+              <img src={use.image} alt="Use Case Image" />
+              <p className="text-center font-normal text-sm">{use.title}</p>
+            </div>
+          ))}
+        </div>
+        <div className="w-full mt-[30px]">
+          <h2 className="font-medium text-xl text-center mb-2.5">For Individuals</h2>
+          <p className="font-light text-sm text-[var(--grey-70)] text-center">
+            For individuals, our mortgage services pave the way to
+            homeownership, and our flexible personal loans provide vital support
+            during various life milestones. We also prioritize retirement
+            planning, ensuring a financially secure future for our customers
+          </p>
+          <div className="flex flex-col gap-[30px] items-center justify-center text-center mt-[50px]">
+            <p className="flex flex-col">
+              <span className="font-medium text-[40px] text-[var(--green-60)]">78%</span>
+              <span className="font-light text-sm text-[var(--grey-70)]">Secure Retirement Planning</span>
+            </p>
+             <p className="flex flex-col">
+              <span className="font-medium text-[40px] text-[var(--green-60)]">63%</span>
+              <span className="font-light text-sm text-[var(--grey-70)]">Manageable Debt Consolidation</span>
+            </p>
+            <p className="flex flex-col">
+              <span className="font-medium text-[40px] text-[var(--green-60)]">91%</span>
+              <span className="font-light text-sm text-[var(--grey-70)]">Reducing Financial Burdens</span>
+            </p>
+          </div>
+        </div>
       </section>
     </div>
   );
