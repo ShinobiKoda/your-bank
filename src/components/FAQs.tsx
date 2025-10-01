@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  fadeInUp,
-  menuStaggerContainer,
-  menuStaggerItem,
-  iconToggle,
-  hoverGrow,
-} from "./animations/motion";
 import { GoChevronDown } from "react-icons/go";
+import { staggerContainer, staggerItem } from "./animations/motion";
 
 export interface FAQItem {
   q: string;
@@ -30,6 +24,8 @@ const FAQs = ({
   breakpointPx = 1024,
 }: FAQsProps) => {
   const [isDesktop, setIsDesktop] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+
   useEffect(() => {
     const mq = window.matchMedia(`(min-width: ${breakpointPx}px)`);
     const update = () => setIsDesktop(mq.matches);
@@ -85,68 +81,45 @@ const FAQs = ({
     }
   };
 
+  const visibleFaqs = showAll ? faqs : faqs.slice(0, 4);
+
   return (
-    <motion.section
-      variants={fadeInUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.25 }}
-      className="mt-[80px] w-full px-4 lg:px:[80px] 2xl:px-[162px] max-w-[1596px] mx-auto lg:mt-[120px] 2xl:mt-[150px]"
+    <section
+      className="mt-[80px] w-full px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto lg:mt-[120px] 2xl:mt-[150px]"
       aria-labelledby="faq-heading"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="mb-[50px] space-y-2.5"
-      >
-        <h2
+      <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{once: false, amount: 0.3}} className="mb-[50px] space-y-2.5">
+        <motion.h2 variants={staggerItem}
           id="faq-heading"
           className="font-medium text-[28px] lg:text-[38px] text-center lg:text-left"
         >
           <span className="text-[var(--green-60)]">Frequently</span> Asked
           Questions
-        </h2>
-        <p className="font-light text-sm lg:text-base text-[var(--grey-70)] text-center lg:text-left">
+        </motion.h2>
+        <motion.p variants={staggerItem} className="font-light text-sm lg:text-base text-[var(--grey-70)] text-center lg:text-left">
           Still have any questions? Contact our team via
           <span className="text-[var(--green-60)]"> support@yourbank.com</span>
-        </p>
+        </motion.p>
       </motion.div>
-      <motion.ul
-        variants={menuStaggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
+      <ul
+        key={showAll ? "all" : "partial"}
         className="space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-4 lg:items-start"
         role="list"
       >
-        {faqs.map((faq, index) => {
+        {visibleFaqs.map((faq, index) => {
           const open = isOpen(index);
           return (
-            <motion.li
+            <li
               key={index}
-              variants={menuStaggerItem}
               className="border border-[var(--grey-15)] rounded-[10px] overflow-hidden bg-[var(--grey-11)] flex flex-col p-[30px]"
-              initial={false}
-              animate={
-                open
-                  ? { backgroundColor: "#1E1E1E" }
-                  : { backgroundColor: "var(--grey-11)" }
-              }
-              transition={{ duration: 0.35 }}
             >
-              <motion.button
+              <button
                 type="button"
                 aria-expanded={open}
                 aria-controls={`faq-panel-${index}`}
                 id={`faq-button-${index}`}
                 onClick={() => toggle(index)}
                 className="text-left flex items-center gap-4 justify-between cursor-pointer"
-                variants={hoverGrow}
-                initial="rest"
-                whileHover="hover"
-                whileTap={{ scale: 0.97 }}
               >
                 <span className="flex-1 min-w-0">
                   <span
@@ -161,14 +134,14 @@ const FAQs = ({
                   </span>
                 </span>
                 <motion.span
-                  variants={iconToggle}
-                  animate={open ? "open" : "closed"}
+                  animate={{ rotate: open ? 180 : 0 }}
+                  transition={{ duration: 0.25 }}
                   className="shrink-0 text-[var(--green-60)]"
                   aria-hidden
                 >
                   <GoChevronDown size={20} />
                 </motion.span>
-              </motion.button>
+              </button>
               <AnimatePresence initial={false}>
                 {open && (
                   <motion.div
@@ -179,26 +152,33 @@ const FAQs = ({
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="border-t border-[var(--grey-15)] overflow-hidden mt-5 pt-5"
                   >
-                    <motion.p
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
-                      className="font-light text-sm lg:text-base text-[var(--grey-70)] leading-[150%]"
-                    >
+                    <p className="font-light text-sm lg:text-base text-[var(--grey-70)] leading-[150%]">
                       {faq.a}
-                    </motion.p>
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.li>
+            </li>
           );
         })}
-      </motion.ul>
-    </motion.section>
+      </ul>
+      {!showAll && faqs.length > 4 && (
+        <div className="w-full flex items-center justify-center">
+          <button
+            type="button"
+            onClick={() => setShowAll(true)}
+            className="bg-[var(--grey-11)] border border-[var(--grey-15)] px-5 py-3.5 rounded-[100px] mt-[50px] font-normal text-sm cursor-pointer"
+            aria-expanded={showAll}
+            aria-controls="faq-heading"
+          >
+            Load All FAQs
+          </button>
+        </div>
+      )}
+    </section>
   );
 };
 

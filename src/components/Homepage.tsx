@@ -1,6 +1,6 @@
 import { HiCheckCircle } from "react-icons/hi2";
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { ClimbingBoxLoader } from "react-spinners";
 import {
   fadeInRight,
@@ -11,6 +11,7 @@ import {
   featureTabsContainer,
   featureTabPill,
   featureCard,
+  featureGrid,
 } from "./animations/motion";
 import { GoArrowUpRight } from "react-icons/go";
 import {
@@ -480,21 +481,34 @@ const Homepage = () => {
       </section>
 
       <section className="w-full px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto mt-[80px] lg:mt-[120px] 2xl:mt-[150px]">
-        <div className="space-y-2.5">
-          <h2 className="text-[28px] lg:text-[38px] font-medium text-center lg:text-left">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          className="space-y-2.5"
+        >
+          <motion.h2
+            variants={staggerItem}
+            className="text-[28px] lg:text-[38px] font-medium text-center lg:text-left"
+          >
             <span>Our</span>
             <span className="text-[var(--green-60)]"> Features</span>
-          </h2>
-          <p className="text-center lg:text-left text-[var(--grey-70)] font-light text-sm lg:text-base">
+          </motion.h2>
+          <motion.p
+            variants={staggerItem}
+            className="text-center lg:text-left text-[var(--grey-70)] font-light text-sm lg:text-base"
+          >
             Experience a host of powerful features at YourBank, including
             seamless online banking, secure transactions, and personalized
             financial insights, all designed to enhance your banking experience
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
         <motion.div
           variants={featuresContainer}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
           className="mt-[50px] space-y-5 lg:grid lg:grid-cols-[1fr_3fr] lg:items-start lg:gap-5"
         >
           <motion.div
@@ -521,45 +535,51 @@ const Homepage = () => {
               );
             })}
           </motion.div>
-          <motion.div
-            variants={featuresContainer}
-            className="space-y-5 lg:grid lg:grid-cols-2 lg:gap-5"
-          >
-            {chunkFeatures(activeFeatures).map((col, colIndex) => (
-              <motion.div
-                key={colIndex}
-                className="space-y-5"
-                variants={staggerContainer}
-              >
-                {col.map((feature) => (
-                  <motion.div
-                    key={feature.title}
-                    variants={featureCard}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    className="relative overflow-hidden w-full p-[30px] space-y-5 rounded-[14px] bg-[var(--grey-11)] border border-[var(--grey-15)] lg:min-h-[227px] group transition-colors hover:border-[var(--green-60)]/40"
-                  >
-                    <h3 className="w-full flex items-center justify-between font-normal text-lg">
-                      <span>{feature.title}</span>
-                      <GoArrowUpRight
-                        className="text-[var(--green-60)] group-hover:scale-110 transition-transform"
-                        size={30}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeFeatureTab}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={featureGrid}
+              className="space-y-5 lg:grid lg:grid-cols-2 lg:gap-5"
+            >
+              {chunkFeatures(activeFeatures).map((col, colIndex) => (
+                <motion.div
+                  key={colIndex}
+                  className="space-y-5"
+                  variants={staggerContainer}
+                >
+                  {col.map((feature) => (
+                    <motion.div
+                      key={feature.title}
+                      variants={featureCard}
+                      whileHover={{ y: -4, scale: 1.02 }}
+                      className="relative overflow-hidden w-full p-[30px] space-y-5 rounded-[14px] bg-[var(--grey-11)] border border-[var(--grey-15)] lg:min-h-[227px] group transition-colors hover:border-[var(--green-60)]/40"
+                    >
+                      <h3 className="w-full flex items-center justify-between font-normal text-lg">
+                        <span>{feature.title}</span>
+                        <GoArrowUpRight
+                          className="text-[var(--green-60)] group-hover:scale-110 transition-transform"
+                          size={30}
+                        />
+                      </h3>
+                      <p className="font-light text-sm text-[var(--grey-70)] leading-[150%]">
+                        {feature.description}
+                      </p>
+                      <span
+                        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          background:
+                            "linear-gradient(120deg, rgba(132,255,164,0.07), rgba(132,255,164,0) 70%)",
+                        }}
                       />
-                    </h3>
-                    <p className="font-light text-sm text-[var(--grey-70)] leading-[150%]">
-                      {feature.description}
-                    </p>
-                    <span
-                      className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{
-                        background:
-                          "linear-gradient(120deg, rgba(132,255,164,0.07), rgba(132,255,164,0) 70%)",
-                      }}
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
-            ))}
-          </motion.div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
       </section>
 

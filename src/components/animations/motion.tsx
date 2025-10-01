@@ -113,12 +113,18 @@ export const fadeInDown: Variants = {
 };
 
 // Features section specific animations
-export const featuresContainer: Variants = {
-  hidden: { opacity: 0 },
+export const featuresContainer:Variants = {
+  hidden: { opacity: 0, y: 20 },   // starting position
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+    y: 0,
+    transition: { duration: 0.5, staggerChildren: 0.1 }
   },
+  exit: {
+    opacity: 0,
+    y: -20,  // slight slide up when leaving
+    transition: { duration: 0.3 }
+  }
 };
 
 export const featureTabsContainer: Variants = {
@@ -167,4 +173,24 @@ export const featureHighlight: Variants = {
     transition: { duration: 0.35, ease: "easeOut" },
   },
   exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
+};
+
+export const featuresSection:Variants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+  },
+};
+
+// grid-level variants (inner)
+export const featureGrid:Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.08 },
+  },
+  exit: { opacity: 0, y: -20, transition: { duration: 0.28 } },
 };
