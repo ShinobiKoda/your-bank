@@ -9,21 +9,40 @@ import {
 } from "./animations/motion";
 
 const Homepage = () => {
-  const useCases = [
+  const useCasesIndividuals = [
     {
-      image: "/images/checking-accounts.svg",
+      image: "/images/personal-finances.svg",
       title: "Managing Personal Finances",
     },
     {
-      image: "/images/checking-accounts.svg",
+      image: "/images/saving-future.svg",
       title: "Saving for the Future",
     },
     {
-      image: "/images/checking-accounts.svg",
+      image: "/images/home-ownership.svg",
       title: "Home Ownership",
     },
     {
-      image: "/images/checking-accounts.svg",
+      image: "/images/education-funding.svg",
+      title: "Education Funding",
+    },
+  ];
+
+  const useCasesBusiness = [
+    {
+      image: "/images/personal-finances.svg",
+      title: "Managing Personal Finances",
+    },
+    {
+      image: "/images/saving-future.svg",
+      title: "Saving for the Future",
+    },
+    {
+      image: "/images/home-ownership.svg",
+      title: "Home Ownership",
+    },
+    {
+      image: "/images/education-funding.svg",
       title: "Education Funding",
     },
   ];
@@ -225,7 +244,7 @@ const Homepage = () => {
                   <motion.div
                     key={index}
                     variants={staggerItem}
-                    className="flex flex-col lg:flex-row lg:items-center lg:gap-[30px]"
+                    className="flex flex-col lg:flex-row lg:items-center lg:gap-[30px] min-h-[238px]"
                   >
                     <div className="flex flex-col">
                       <div className="w-full flex items-center justify-center mb-5">
@@ -267,14 +286,14 @@ const Homepage = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
-            className="w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5"
+            className="w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5 rounded-[20px]"
             style={{ backgroundImage: "url('/images/use-cases-bg.svg')" }}
           >
-            {useCases.map((use, index) => (
+            {useCasesIndividuals.map((use, index) => (
               <motion.div
                 key={index}
                 variants={staggerItem}
-                className="min-w-[54px] min-h-[160px] rounded-xl bg-[#1A1A1A] px-3.5 py-5 flex flex-col items-center justify-center gap-3.5"
+                className="min-w-[54px] min-h-[160px] rounded-xl bg-[var(--grey-10)] border border-[var(--grey-15)] px-3.5 py-5 flex flex-col items-center justify-center gap-3.5"
               >
                 <img src={use.image} alt="Use Case Image" />
                 <p className="text-center font-normal text-sm lg:text-base">
@@ -310,7 +329,7 @@ const Homepage = () => {
               <div className="flex flex-col gap-[30px] items-center justify-center lg:justify-start lg:items-start text-center lg:text-left mt-[50px] w-full max-w-[258px] mx-auto lg:flex-row lg:max-w-full">
                 <motion.p
                   variants={staggerItem}
-                  className="flex flex-col border-b border-dashed border-[var(--grey-15)] pb-[30px] w-full"
+                  className="flex flex-col border-b lg:border-r lg:border-b-0 border-dashed border-[var(--grey-15)] pb-[30px] w-full"
                 >
                   <span className="font-medium text-[40px] text-[var(--green-60)]">
                     78%
@@ -321,7 +340,7 @@ const Homepage = () => {
                 </motion.p>
                 <motion.p
                   variants={staggerItem}
-                  className="flex flex-col border-b border-dashed border-[var(--grey-15)] pb-[30px] w-full"
+                  className="flex flex-col border-b lg:border-r lg:border-b-0 border-dashed border-[var(--grey-15)] pb-[30px] w-full"
                 >
                   <span className="font-medium text-[40px] text-[var(--green-60)]">
                     63%
@@ -377,17 +396,17 @@ const Homepage = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
-            className="order-2  w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5 mt-[40px]"
+            className="order-2  w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5 mt-[40px] rounded-[20px]"
             style={{ backgroundImage: "url('/images/use-cases-bg.svg')" }}
           >
-            {useCases.map((use, index) => (
+            {useCasesBusiness.map((use, index) => (
               <motion.div
                 key={index}
                 variants={staggerItem}
-                className="min-w-[54px] min-h-[160px] rounded-xl bg-[#1A1A1A] px-3.5 py-5 flex flex-col items-center justify-center gap-3.5"
+                className="min-w-[54px] min-h-[160px] rounded-xl bg-[var(--grey-10)] border border-[var(--grey-15)] px-3.5 py-5 flex flex-col items-center justify-center gap-3.5"
               >
                 <img src={use.image} alt="Use Case Image" />
-                <p className="text-center font-normal text-sm">{use.title}</p>
+                <p className="text-center font-normal text-sm lg:text-base">{use.title}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -418,7 +437,7 @@ const Homepage = () => {
               <div className="flex flex-col gap-[30px] lg:flex-row items-center justify-center text-center lg:text-left mt-[50px] w-full max-w-[258px] lg:max-w-full mx-auto">
                 <motion.p
                   variants={staggerItem}
-                  className="flex flex-col border-b border-dashed border-[var(--grey-15)] pb-[30px] w-full"
+                  className="flex flex-col border-b border-dashed lg:border-r lg:border-b-0 border-[var(--grey-15)] pb-[30px] w-full"
                 >
                   <span className="font-medium text-[40px] text-[var(--green-60)]">
                     65%
@@ -429,7 +448,7 @@ const Homepage = () => {
                 </motion.p>
                 <motion.p
                   variants={staggerItem}
-                  className="flex flex-col border-b border-dashed border-[var(--grey-15)] pb-[30px] w-full"
+                  className="flex flex-col border-b border-dashed lg:border-r lg:border-b-0 border-[var(--grey-15)] pb-[30px] w-full"
                 >
                   <span className="font-medium text-[40px] text-[var(--green-60)]">
                     70%
