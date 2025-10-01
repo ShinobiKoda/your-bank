@@ -254,48 +254,231 @@ const Homepage = () => {
       </motion.section>
 
       <section className="w-full mt-[80px] lg:mt-[120px] px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
-        <h2 className="text-center text-[var(--green-60)] font-medium text-[28px] mb-2.5">
+        <h2 className="text-center text-[var(--green-60)] font-medium text-[28px] lg:text-[38px] mb-2.5 lg:text-left">
           Use Cases
         </h2>
-        <p className="font-light text-sm mb-[60px] text-center text-[var(--grey-70)]">
+        <p className="font-light text-sm lg:text-base mb-[60px] text-center text-[var(--grey-70)] lg:text-left">
           At YourBank, we cater to the diverse needs of individuals and
           businesses alike, offering a wide range of financial solutions
         </p>
-        <div
-          className="w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5"
-          style={{ backgroundImage: "url('/images/use-cases-bg.svg')" }}
-        >
-          {useCases.map((use, index) => (
-            <div
-              key={index}
-              className="min-w-[54px] min-h-[160px] rounded-xl bg-[#1A1A1A] px-3.5 py-5 flex flex-col items-center justify-center gap-3.5"
+        <div className="w-full lg:grid lg:grid-cols-2 lg:gap-[60px]">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            className="w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5"
+            style={{ backgroundImage: "url('/images/use-cases-bg.svg')" }}
+          >
+            {useCases.map((use, index) => (
+              <motion.div
+                key={index}
+                variants={staggerItem}
+                className="min-w-[54px] min-h-[160px] rounded-xl bg-[#1A1A1A] px-3.5 py-5 flex flex-col items-center justify-center gap-3.5"
+              >
+                <img src={use.image} alt="Use Case Image" />
+                <p className="text-center font-normal text-sm lg:text-base">
+                  {use.title}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            className="w-full mt-[30px]"
+          >
+            <motion.h2
+              variants={staggerItem}
+              className="font-medium text-xl lg:text-[26px] text-center mb-2.5 lg:text-left"
             >
-              <img src={use.image} alt="Use Case Image" />
-              <p className="text-center font-normal text-sm">{use.title}</p>
+              For Individuals
+            </motion.h2>
+            <motion.p
+              variants={staggerItem}
+              className="font-light text-sm lg:text-base text-[var(--grey-70)] text-center lg:text-left"
+            >
+              For individuals, our mortgage services pave the way to
+              homeownership, and our flexible personal loans provide vital
+              support during various life milestones. We also prioritize
+              retirement planning, ensuring a financially secure future for our
+              customers
+            </motion.p>
+            <div>
+              <div className="flex flex-col gap-[30px] items-center justify-center lg:justify-start lg:items-start text-center lg:text-left mt-[50px] w-full max-w-[258px] mx-auto lg:flex-row lg:max-w-full">
+                <motion.p
+                  variants={staggerItem}
+                  className="flex flex-col border-b border-dashed border-[var(--grey-15)] pb-[30px] w-full"
+                >
+                  <span className="font-medium text-[40px] text-[var(--green-60)]">
+                    78%
+                  </span>
+                  <span className="font-light text-sm lg:text-base text-[var(--grey-70)]">
+                    Secure Retirement Planning
+                  </span>
+                </motion.p>
+                <motion.p
+                  variants={staggerItem}
+                  className="flex flex-col border-b border-dashed border-[var(--grey-15)] pb-[30px] w-full"
+                >
+                  <span className="font-medium text-[40px] text-[var(--green-60)]">
+                    63%
+                  </span>
+                  <span className="font-light text-sm lg:text-base text-[var(--grey-70)]">
+                    Manageable Debt Consolidation
+                  </span>
+                </motion.p>
+                <motion.p variants={staggerItem} className="flex flex-col">
+                  <span className="font-medium text-[40px] text-[var(--green-60)]">
+                    91%
+                  </span>
+                  <span className="font-light text-sm lg:text-base text-[var(--grey-70)]">
+                    Reducing Financial Burdens
+                  </span>
+                </motion.p>
+              </div>
+              <motion.div
+                variants={staggerItem}
+                className="w-full flex items-center justify-center mt-[50px] lg:justify-start"
+              >
+                <motion.button
+                  type="button"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group relative px-5 py-3.5 text-sm font-normal rounded-[82px] bg-[var(--grey-11)] border border-[var(--grey-15)] cursor-pointer overflow-hidden transition-colors duration-300 hover:bg-[var(--grey-15)]"
+                >
+                  <span className="relative z-10">Learn More</span>
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.15) 100%)",
+                    }}
+                  />
+                  <motion.span
+                    aria-hidden
+                    initial={{ x: "-120%" }}
+                    whileHover={{ x: "120%" }}
+                    transition={{ duration: 0.9, ease: "easeInOut" }}
+                    className="absolute top-0 left-0 h-full w-[50%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-40"
+                  />
+                </motion.button>
+              </motion.div>
             </div>
-          ))}
+          </motion.div>
         </div>
-        <div className="w-full mt-[30px]">
-          <h2 className="font-medium text-xl text-center mb-2.5">For Individuals</h2>
-          <p className="font-light text-sm text-[var(--grey-70)] text-center">
-            For individuals, our mortgage services pave the way to
-            homeownership, and our flexible personal loans provide vital support
-            during various life milestones. We also prioritize retirement
-            planning, ensuring a financially secure future for our customers
-          </p>
-          <div className="flex flex-col gap-[30px] items-center justify-center text-center mt-[50px]">
-            <p className="flex flex-col">
-              <span className="font-medium text-[40px] text-[var(--green-60)]">78%</span>
-              <span className="font-light text-sm text-[var(--grey-70)]">Secure Retirement Planning</span>
-            </p>
-             <p className="flex flex-col">
-              <span className="font-medium text-[40px] text-[var(--green-60)]">63%</span>
-              <span className="font-light text-sm text-[var(--grey-70)]">Manageable Debt Consolidation</span>
-            </p>
-            <p className="flex flex-col">
-              <span className="font-medium text-[40px] text-[var(--green-60)]">91%</span>
-              <span className="font-light text-sm text-[var(--grey-70)]">Reducing Financial Burdens</span>
-            </p>
+
+        <div className="w-full lg:grid lg:grid-cols-2 lg:gap-[60px] lg:mt-[40px]">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            className="order-2  w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5 mt-[40px]"
+            style={{ backgroundImage: "url('/images/use-cases-bg.svg')" }}
+          >
+            {useCases.map((use, index) => (
+              <motion.div
+                key={index}
+                variants={staggerItem}
+                className="min-w-[54px] min-h-[160px] rounded-xl bg-[#1A1A1A] px-3.5 py-5 flex flex-col items-center justify-center gap-3.5"
+              >
+                <img src={use.image} alt="Use Case Image" />
+                <p className="text-center font-normal text-sm">{use.title}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+          <div className="">
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              className="w-full mt-[30px]"
+            >
+              <motion.h2
+                variants={staggerItem}
+                className="font-medium text-xl lg:text-[26px] text-center mb-2.5 lg:text-left"
+              >
+                For Business
+              </motion.h2>
+              <motion.p
+                variants={staggerItem}
+                className="font-light text-sm lg:text-base text-[var(--grey-70)] text-center lg:text-left"
+              >
+                For businesses, we empower growth with working capital solutions
+                that optimize cash flow, and our tailored financing options fuel
+                business expansion. Whatever your financial aspirations,
+                YourBank is committed to providing the right tools and support
+                to achieve them
+              </motion.p>
+              <div className="flex flex-col gap-[30px] lg:flex-row items-center justify-center text-center lg:text-left mt-[50px] w-full max-w-[258px] lg:max-w-full mx-auto">
+                <motion.p
+                  variants={staggerItem}
+                  className="flex flex-col border-b border-dashed border-[var(--grey-15)] pb-[30px] w-full"
+                >
+                  <span className="font-medium text-[40px] text-[var(--green-60)]">
+                    65%
+                  </span>
+                  <span className="font-light text-sm lg:text-base text-[var(--grey-70)]">
+                    Cash Flow Management
+                  </span>
+                </motion.p>
+                <motion.p
+                  variants={staggerItem}
+                  className="flex flex-col border-b border-dashed border-[var(--grey-15)] pb-[30px] w-full"
+                >
+                  <span className="font-medium text-[40px] text-[var(--green-60)]">
+                    70%
+                  </span>
+                  <span className="font-light text-sm lg:text-base text-[var(--grey-70)]">
+                    Drive Business Expansion
+                  </span>
+                </motion.p>
+                <motion.p variants={staggerItem} className="flex flex-col">
+                  <span className="font-medium text-[40px] text-[var(--green-60)]">
+                    45%
+                  </span>
+                  <span className="font-light text-sm lg:text-base text-[var(--grey-70)]">
+                    Streamline payroll processing
+                  </span>
+                </motion.p>
+              </div>
+            </motion.div>
+            <motion.div
+              variants={staggerItem}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              className="w-full flex items-center justify-center mt-[50px] lg:justify-start"
+            >
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-5 py-3.5 rounded-[82px] font-normal text-sm bg-[var(--grey-11)] border border-[var(--grey-15)] cursor-pointer overflow-hidden transition-colors duration-300 hover:bg-[var(--grey-15)]"
+              >
+                <span className="relative z-10">Learn More</span>
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.15) 100%)",
+                  }}
+                />
+                <motion.span
+                  aria-hidden
+                  initial={{ x: "-120%" }}
+                  whileHover={{ x: "120%" }}
+                  transition={{ duration: 0.9, ease: "easeInOut" }}
+                  className="absolute top-0 left-0 h-full w-[50%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-40"
+                />
+              </motion.button>
+            </motion.div>
           </div>
         </div>
       </section>
