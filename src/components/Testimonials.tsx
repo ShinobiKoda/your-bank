@@ -22,7 +22,7 @@ const TestimonialCard = ({ item }: TestimonialCardProps) => (
       <img src="/images/quote-icon.svg" alt="Quote Icon" />
       <div className="w-[40%] h-px bg-[var(--grey-15)]"></div>
     </div>
-    <p className="text-center font-normal text-sm my-[30px] leading-[150%]">
+    <p className="text-center font-normal text-sm lg:text-base my-[30px] leading-[150%]">
       {item.description}
     </p>
     <p className="text-center font-medium text-base text-[var(--green-60)]">
@@ -183,7 +183,6 @@ const Testimonials = () => {
         </motion.div>
       </div>
 
-      {/* CAROUSEL */}
       <div className="mt-[40px]">
         {loading && (
           <p className="text-center text-sm text-[var(--grey-70)]">
@@ -224,7 +223,6 @@ const Testimonials = () => {
                   <FaArrowLeftLong className="text-[var(--green-60)]" size={25} />
                 </button>
 
-                {/* Right Arrow (desktop only) */}
                 <button
                   type="button"
                   onClick={next}
@@ -237,7 +235,6 @@ const Testimonials = () => {
                   <FaArrowRightLong className="text-[var(--green-60)]" size={25} />
                 </button>
 
-                {/* Dots (mobile only) */}
                 <div className="flex lg:hidden items-center gap-1 mt-[30px] justify-center">
                   {list.map((_, i) => (
                     <span
