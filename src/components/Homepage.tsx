@@ -13,7 +13,13 @@ import {
   featureCard,
 } from "./animations/motion";
 import { GoArrowUpRight } from "react-icons/go";
-import { fetchHomepageData, type HomepageData } from "../api/Fetchdata";
+import {
+  fetchHomepageData,
+  type HomepageData,
+  type FAQEntry,
+} from "../api/Fetchdata";
+import type { FeatureItem } from "../api/Fetchdata";
+import FAQs from "./FAQs";
 
 const Homepage = () => {
   const [data, setData] = useState<HomepageData | null>(null);
@@ -22,9 +28,6 @@ const Homepage = () => {
 
   useEffect(() => {
     let mounted = true;
-    const MIN_LOADING_TIME = 3000; // ms
-    const start = performance.now();
-
     (async () => {
       try {
         const d = await fetchHomepageData();
@@ -32,13 +35,7 @@ const Homepage = () => {
       } catch {
         if (mounted) setError("Failed to load homepage data");
       } finally {
-        const elapsed = performance.now() - start;
-        const remaining = MIN_LOADING_TIME - elapsed;
-        const delay = remaining > 0 ? remaining : 0;
-        const timeout = setTimeout(() => {
-          if (mounted) setLoading(false);
-        }, delay);
-        if (!mounted) clearTimeout(timeout);
+        if (mounted) setLoading(false);
       }
     })();
 
@@ -50,10 +47,13 @@ const Homepage = () => {
   const [activeTab, setActiveTab] = useState("individuals");
   const [activeFeatureTab, setActiveFeatureTab] = useState<string>("online");
 
-  const activeFeatures = data?.features[activeFeatureTab] ?? [];
+  const activeFeatures =
+    activeFeatureTab !== "faqs" && data?.features[activeFeatureTab]
+      ? (data.features[activeFeatureTab] as FeatureItem[])
+      : [];
   const featureTabs = data?.featureTabs ?? [];
 
-  const chunkFeatures = (items: { title: string; description: string }[]) => {
+  const chunkFeatures = (items: FeatureItem[]) => {
     const mid = Math.ceil(items.length / 2);
     return [items.slice(0, mid), items.slice(mid)];
   };
@@ -494,8 +494,7 @@ const Homepage = () => {
         <motion.div
           variants={featuresContainer}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.25 }}
+          animate="visible"
           className="mt-[50px] space-y-5 lg:grid lg:grid-cols-[1fr_3fr] lg:items-start lg:gap-5"
         >
           <motion.div
@@ -563,6 +562,10 @@ const Homepage = () => {
           </motion.div>
         </motion.div>
       </section>
+
+      {Array.isArray(data.features.faqs) && data.features.faqs.length > 0 && (
+        <FAQs faqs={data.features.faqs as FAQEntry[]} />
+      )}
     </div>
   );
 };

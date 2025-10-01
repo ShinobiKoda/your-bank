@@ -26,6 +26,11 @@ export interface FeatureItem {
   description: string;
 }
 
+export interface FAQEntry {
+  q: string;
+  a: string;
+}
+
 export interface HomepageData {
   supportedCurrencies: CurrencyList;
   useCases: {
@@ -41,10 +46,12 @@ export interface HomepageData {
     business: StatItem[];
   };
   featureTabs: FeatureTabDef[];
-  features: Record<string, FeatureItem[]>;
+  features: {
+    [key: string]: FeatureItem[] | FAQEntry[];
+    faqs: FAQEntry[];
+  };
 }
 
-// Simple in-memory cache to avoid repeated network fetches
 let cache: HomepageData | null = null;
 
 export async function fetchHomepageData(): Promise<HomepageData> {

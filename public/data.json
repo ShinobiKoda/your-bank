@@ -138,6 +138,40 @@
         "title": "Fraud & Dispute Assistance",
         "description": "Rapid card lock, dispute filing, and real-time case tracking ensure you stay protected if suspicious activity occurs."
       }
+    ],
+    "faqs": [
+      {
+        "q": "How do I open account with YourBank?",
+        "a": "Opening an account with YourBank is easy. Simply visit our website and click on the 'Open an Account' button. Follow the prompts, provide the required information, and complete the application process. If you have any questions or need assistance, our customer support team is available to help."
+      },
+      {
+        "q": "How do I access my accounts Online?",
+        "a": "Accessing your accounts online is simple and secure. Visit our website and click on the 'Login' button. Enter your username and password to access your accounts. If you haven't registered for online banking, click on the 'Enroll Now' button and follow the registration process. If you need assistance, our customer support team is available to guide you."
+      },
+      {
+        "q": "What documents do I need to provide to apply for a loan?",
+        "a": "The documents required for a loan application may vary depending on the type of loan you are applying for. Generally, you will need to provide identification documents (such as a passport or driver's license), proof of income (such as pay stubs or tax returns), and information about the collateral (if applicable). Our loan officers will guide you through the specific requirements during the application process."
+      },
+      {
+        "q": "Are my transactions and personal information secure?",
+        "a": "At YourBank, we prioritize the security of your transactions and personal information. We employ industry-leading encryption and multi-factor authentication to ensure that your data is protected. Additionally, we regularly update our security measures to stay ahead of emerging threats. You can bank with confidence knowing that we have robust security systems in place."
+      },
+      {
+        "q": "What fees should I expect with a standard checking or savings account?",
+        "a": "Most personal checking and savings accounts at YourBank have no monthly maintenance fee when you enroll in e‑statements or maintain a modest minimum balance. We also offer fee-free ATM access within our partner network. Any potential fees (like wire, overdraft, or out-of-network ATM) are clearly disclosed during account opening and in your online dashboard's Fee Schedule section."
+      },
+      {
+        "q": "How long do mobile check deposits take to clear?",
+        "a": "Mobile deposits typically show as pending immediately and the first $225 is often available within 1 business day. The remaining amount is usually cleared in 1–2 business days, though larger or unusual items may take longer for security review. You'll receive a push or email notification the moment funds become available."
+      },
+      {
+        "q": "Can I send international wire transfers through YourBank?",
+        "a": "Yes. You can initiate international wires from the Transfers & Payments section of online or mobile banking. You'll need the recipient bank's SWIFT/BIC, the IBAN or account number, and the beneficiary's full name and address. Outbound international wires post same business day if submitted before the daily cutoff. Real‑time FX rate estimates are shown before you confirm."
+      },
+      {
+        "q": "What should I do if I suspect fraud or see an unfamiliar transaction?",
+        "a": "Immediately lock the affected card in the app (Card Controls > Lock Card) or via web, then open a support chat or call our 24/7 fraud line. We'll help you review recent activity, file a dispute if needed, and issue a new card or credentials. Enabling real‑time spending alerts and multi‑factor authentication further reduces future risk."
+      }
     ]
   }
 }
