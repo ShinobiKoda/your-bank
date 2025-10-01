@@ -1,0 +1,143 @@
+{
+  "supportedCurrencies": [
+    "/images/currency-bitcoin.svg",
+    "/images/currency-dollar.svg",
+    "/images/currency-eth.svg",
+    "/images/currency-euro.svg"
+  ],
+  "useCases": {
+    "individuals": [
+      {
+        "image": "/images/personal-finances.svg",
+        "title": "Managing Personal Finances"
+      },
+      {
+        "image": "/images/saving-future.svg",
+        "title": "Saving for the Future"
+      },
+      { "image": "/images/home-ownership.svg", "title": "Home Ownership" },
+      { "image": "/images/education-funding.svg", "title": "Education Funding" }
+    ],
+    "business": [
+      {
+        "image": "/images/personal-finances.svg",
+        "title": "Managing Personal Finances"
+      },
+      {
+        "image": "/images/saving-future.svg",
+        "title": "Saving for the Future"
+      },
+      { "image": "/images/home-ownership.svg", "title": "Home Ownership" },
+      { "image": "/images/education-funding.svg", "title": "Education Funding" }
+    ]
+  },
+  "products": {
+    "individuals": [
+      {
+        "image": "/images/checking-accounts.svg",
+        "title": "Checking Accounts",
+        "description": "Enjoy easy and convenient access to your funds with our range of checking account options. Benefit from features such as online and mobile banking, debit cards, and free ATM access."
+      },
+      {
+        "image": "/images/savings-account.svg",
+        "title": "Savings Account",
+        "description": "Build your savings with our competitive interest rates and flexible savings account options. Whether you're saving for a specific goal or want to grow your wealth over time, we have the right account for you."
+      },
+      {
+        "image": "/images/loans-mortgages.svg",
+        "title": "Loans and Mortages",
+        "description": "Realize your dreams with our flexible loan and mortgage options. From personal loans to home mortgages, our experienced loan officers are here to guide you through the application process and help you secure the funds you need."
+      }
+    ],
+    "business": [
+      {
+        "image": "/images/checking-accounts.svg",
+        "title": "Business Checking",
+        "description": "Manage day-to-day cash flow with business checking accounts built for companies of all sizes. Benefit from multiple user access, low fees, integrated payments, and fast ACH capabilities."
+      },
+      {
+        "image": "/images/savings-account.svg",
+        "title": "Business Savings",
+        "description": "Grow your company's reserves with tiered interest rates, automated transfers, and cash-management tools that help you plan for payroll, taxes, and future investments."
+      },
+      {
+        "image": "/images/loans-mortgages.svg",
+        "title": "Commercial Loans & Financing",
+        "description": "Access tailored financing — lines of credit, equipment loans, and commercial mortgages — with dedicated advisors to structure terms that support your growth and cash-flow needs."
+      }
+    ]
+  },
+  "stats": {
+    "individuals": [
+      { "value": "78%", "label": "Secure Retirement Planning" },
+      { "value": "63%", "label": "Manageable Debt Consolidation" },
+      { "value": "91%", "label": "Reducing Financial Burdens" }
+    ],
+    "business": [
+      { "value": "65%", "label": "Cash Flow Management" },
+      { "value": "70%", "label": "Drive Business Expansion" },
+      { "value": "45%", "label": "Streamline payroll processing" }
+    ]
+  },
+  "featureTabs": [
+    { "key": "online", "label": "Online Banking" },
+    { "key": "tools", "label": "Financial Tools" },
+    { "key": "support", "label": "Customer Support" }
+  ],
+  "features": {
+    "online": [
+      {
+        "title": "24/7 Account Access",
+        "description": "Enjoy the convenience of accessing your accounts anytime, anywhere through our secure online banking platform. Check balances, transfer funds, and pay bills with ease."
+      },
+      {
+        "title": "Mobile Banking App",
+        "description": "Stay connected to your finances on the go with our user-friendly mobile banking app. Easily manage your accounts, deposit checks, and make payments from your smartphone or tablet."
+      },
+      {
+        "title": "Secure Transactions",
+        "description": "Rest assured knowing that your transactions are protected by industry-leading security measures. We employ encryption and multi-factor authentication to safeguard your financial information."
+      },
+      {
+        "title": "Bill Pay Transfers",
+        "description": "Save time and avoid late fees with our convenient bill pay service. Set up recurring payments or make one-time transfers between your accounts with just a few clicks."
+      }
+    ],
+    "tools": [
+      {
+        "title": "Budgeting & Expense Tracking",
+        "description": "Automatically categorize spending, visualize cash flow trends, and set monthly limits to stay on track with personalized budget insights."
+      },
+      {
+        "title": "Goal-Based Savings Vaults",
+        "description": "Create multiple savings vaults (e.g. vacation, emergency fund) with progress bars and automated recurring transfers toward each goal."
+      },
+      {
+        "title": "Investment Portfolio Overview",
+        "description": "View aggregated balances across linked brokerage accounts, track performance, and monitor asset allocation in one unified dashboard."
+      },
+      {
+        "title": "Real-Time Spending Alerts",
+        "description": "Get instant push and email notifications for large purchases, unusual merchant activity, or when approaching category limits."
+      }
+    ],
+    "support": [
+      {
+        "title": "24/7 Live Chat Support",
+        "description": "Connect with trained specialists any time for help with transactions, security concerns, or product guidance without waiting on hold."
+      },
+      {
+        "title": "Dedicated Account Manager",
+        "description": "Qualifying customers receive a named advisor for proactive check‑ins, financial health reviews, and fast escalations."
+      },
+      {
+        "title": "Knowledge Base & Tutorials",
+        "description": "Search step‑by‑step articles, quick videos, and interactive walkthroughs covering common tasks and advanced features."
+      },
+      {
+        "title": "Fraud & Dispute Assistance",
+        "description": "Rapid card lock, dispute filing, and real-time case tracking ensure you stay protected if suspicious activity occurs."
+      }
+    ]
+  }
+}

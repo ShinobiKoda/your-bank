@@ -1,5 +1,5 @@
 import { HiCheckCircle } from "react-icons/hi2";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import {
   fadeInRight,
@@ -7,107 +7,59 @@ import {
   staggerContainer,
   staggerItem,
 } from "./animations/motion";
+import { GoArrowUpRight } from "react-icons/go";
+import { fetchHomepageData, type HomepageData } from "../api/Fetchdata";
 
 const Homepage = () => {
-  const useCasesIndividuals = [
-    {
-      image: "/images/personal-finances.svg",
-      title: "Managing Personal Finances",
-    },
-    {
-      image: "/images/saving-future.svg",
-      title: "Saving for the Future",
-    },
-    {
-      image: "/images/home-ownership.svg",
-      title: "Home Ownership",
-    },
-    {
-      image: "/images/education-funding.svg",
-      title: "Education Funding",
-    },
-  ];
+  const [data, setData] = useState<HomepageData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const useCasesBusiness = [
-    {
-      image: "/images/personal-finances.svg",
-      title: "Managing Personal Finances",
-    },
-    {
-      image: "/images/saving-future.svg",
-      title: "Saving for the Future",
-    },
-    {
-      image: "/images/home-ownership.svg",
-      title: "Home Ownership",
-    },
-    {
-      image: "/images/education-funding.svg",
-      title: "Education Funding",
-    },
-  ];
-
-  const supportedCurrencies = [
-    "/images/currency-bitcoin.svg",
-    "/images/currency-dollar.svg",
-    "/images/currency-eth.svg",
-    "/images/currency-euro.svg",
-  ];
-
-  const tab = [
-    {
-      tab: "individuals",
-      label: "For Individuals",
-    },
-    {
-      tab: "businesses",
-      label: "For Businesses",
-    },
-  ];
-
-  const individualsTab = [
-    {
-      image: "/images/checking-accounts.svg",
-      title: "Checking Accounts",
-      description:
-        "Enjoy easy and convenient access to your funds with our range of checking account options. Benefit from features such as online and mobile banking, debit cards, and free ATM access.",
-    },
-    {
-      image: "/images/savings-account.svg",
-      title: "Savings Account",
-      description:
-        "Build your savings with our competitive interest rates and flexible savings account options. Whether you're saving for a specific goal or want to grow your wealth over time, we have the right account for you.",
-    },
-    {
-      image: "/images/loans-mortgages.svg",
-      title: "Loans and Mortages",
-      description:
-        "Realize your dreams with our flexible loan and mortgage options. From personal loans to home mortgages, our experienced loan officers are here to guide you through the application process and help you secure the funds you need.",
-    },
-  ];
-
-  const businessTab = [
-    {
-      image: "/images/checking-accounts.svg",
-      title: "Business Checking",
-      description:
-        "Manage day-to-day cash flow with business checking accounts built for companies of all sizes. Benefit from multiple user access, low fees, integrated payments, and fast ACH capabilities.",
-    },
-    {
-      image: "/images/savings-account.svg",
-      title: "Business Savings",
-      description:
-        "Grow your company's reserves with tiered interest rates, automated transfers, and cash-management tools that help you plan for payroll, taxes, and future investments.",
-    },
-    {
-      image: "/images/loans-mortgages.svg",
-      title: "Commercial Loans & Financing",
-      description:
-        "Access tailored financing — lines of credit, equipment loans, and commercial mortgages — with dedicated advisors to structure terms that support your growth and cash-flow needs.",
-    },
-  ];
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const d = await fetchHomepageData();
+        if (mounted) {
+          setData(d);
+        }
+      } catch {
+        if (mounted) setError("Failed to load homepage data");
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const [activeTab, setActiveTab] = useState("individuals");
+  const [activeFeatureTab, setActiveFeatureTab] = useState<string>("online");
+
+  const activeFeatures = data?.features[activeFeatureTab] ?? [];
+  const featureTabs = data?.featureTabs ?? [];
+
+  const chunkFeatures = (items: { title: string; description: string }[]) => {
+    const mid = Math.ceil(items.length / 2);
+    return [items.slice(0, mid), items.slice(mid)];
+  };
+
+  if (loading) {
+    return (
+      <div className="w-full flex items-center justify-center py-40">
+        <p className="text-sm text-[var(--grey-70)]">Loading content...</p>
+      </div>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <div className="w-full flex items-center justify-center py-40">
+        <p className="text-sm text-red-400">{error || "No data available"}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -171,7 +123,7 @@ const Homepage = () => {
             <div className="bg-[#22251B] pl-[12.31px] pr-[5.13px] py-[5.13px] flex items-center rounded-[41.02px] gap-1.5">
               <p className="font-normal text-[12.4px]">Supported Currency</p>
               <div className="bg-[#1A1A1A] flex items-center rounded-[28.2px] gap-1 px-[5.13px] py-[5.13px]">
-                {supportedCurrencies.map((currency, index) => (
+                {data.supportedCurrencies.map((currency, index) => (
                   <div
                     key={index}
                     className="w-[28px] h-[28px] bg-[#262626] rounded-full flex items-center justify-center"
@@ -211,7 +163,10 @@ const Homepage = () => {
             className="w-full max-w-[320px] mx-auto"
           >
             <div className="w-full bg-[#1C1C1C] rounded-[82px] border border-[#262626] p-3 text-black text-center font-normal text-sm">
-              {tab.map((tab, index) => (
+              {[
+                { tab: "individuals", label: "For Individuals" },
+                { tab: "businesses", label: "For Businesses" },
+              ].map((tab, index) => (
                 <button
                   onClick={() => setActiveTab(tab.tab)}
                   key={index}
@@ -230,7 +185,9 @@ const Homepage = () => {
         <div className="mt-[60px] lg:mt-[80px]">
           {(() => {
             const items =
-              activeTab === "individuals" ? individualsTab : businessTab;
+              activeTab === "individuals"
+                ? data.products.individuals
+                : data.products.business;
             return (
               <motion.div
                 key={activeTab}
@@ -289,7 +246,7 @@ const Homepage = () => {
             className="w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5 rounded-[20px]"
             style={{ backgroundImage: "url('/images/use-cases-bg.svg')" }}
           >
-            {useCasesIndividuals.map((use, index) => (
+            {data.useCases.individuals.map((use, index) => (
               <motion.div
                 key={index}
                 variants={staggerItem}
@@ -399,14 +356,16 @@ const Homepage = () => {
             className="order-2  w-full bg-center bg-cover bg-no-repeat p-5 grid grid-cols-2 gap-2.5 mt-[40px] rounded-[20px]"
             style={{ backgroundImage: "url('/images/use-cases-bg.svg')" }}
           >
-            {useCasesBusiness.map((use, index) => (
+            {data.useCases.business.map((use, index) => (
               <motion.div
                 key={index}
                 variants={staggerItem}
                 className="min-w-[54px] min-h-[160px] rounded-xl bg-[var(--grey-10)] border border-[var(--grey-15)] px-3.5 py-5 flex flex-col items-center justify-center gap-3.5"
               >
                 <img src={use.image} alt="Use Case Image" />
-                <p className="text-center font-normal text-sm lg:text-base">{use.title}</p>
+                <p className="text-center font-normal text-sm lg:text-base">
+                  {use.title}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -498,6 +457,60 @@ const Homepage = () => {
                 />
               </motion.button>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto mt-[80px] lg:mt-[120px] 2xl:mt-[150px]">
+        <div className="space-y-2.5">
+          <h2 className="text-[28px] lg:text-[38px] font-medium text-center lg:text-left">
+            <span>Our</span>
+            <span className="text-[var(--green-60)]"> Features</span>
+          </h2>
+          <p className="text-center lg:text-left text-[var(--grey-70)] font-light text-sm lg:text-base">
+            Experience a host of powerful features at YourBank, including
+            seamless online banking, secure transactions, and personalized
+            financial insights, all designed to enhance your banking experience
+          </p>
+        </div>
+        <div className="mt-[50px] space-y-5 lg:grid lg:grid-cols-[1fr_3fr] lg:items-start lg:gap-5">
+          <div className="w-full bg-[var(--grey-11)] rounded-[20px] p-5 lg:p-10 flex flex-row gap-5 overflow-x-scroll lg:overflow-hidden lg:flex-col">
+            {featureTabs.map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setActiveFeatureTab(t.key)}
+                className={`rounded-[100px] min-w-[144px] text-nowrap px-5 py-3.5 border border-[var(--grey-15)] font-normal text-sm cursor-pointer transition-colors ${
+                  activeFeatureTab === t.key
+                    ? "bg-[var(--grey-10)] text-[var(--green-60)] ring-1 ring-[var(--green-60)]/40"
+                    : "bg-[var(--grey-10)] text-white/80 hover:text-white"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+          <div className="space-y-5 lg:grid lg:grid-cols-2 lg:gap-5">
+            {chunkFeatures(activeFeatures).map((col, colIndex) => (
+              <div key={colIndex} className="space-y-5">
+                {col.map((feature) => (
+                  <div
+                    key={feature.title}
+                    className="w-full p-[30px] space-y-5 rounded-[10px] bg-[var(--grey-11)] border border-[var(--grey-15)] lg:min-h-[227px] group hover:border-[var(--green-60)]/40 transition-colors"
+                  >
+                    <h3 className="w-full flex items-center justify-between font-normal text-lg">
+                      <span>{feature.title}</span>
+                      <GoArrowUpRight
+                        className="text-[var(--green-60)] group-hover:scale-110 transition-transform"
+                        size={30}
+                      />
+                    </h3>
+                    <p className="font-light text-sm text-[var(--grey-70)]">
+                      {feature.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
