@@ -21,6 +21,7 @@ import {
 } from "../api/Fetchdata";
 import type { FeatureItem } from "../api/Fetchdata";
 import FAQs from "./FAQs";
+import Testimonials from "./Testimonials"
 
 const Homepage = () => {
   const [data, setData] = useState<HomepageData | null>(null);
@@ -583,9 +584,11 @@ const Homepage = () => {
         </motion.div>
       </section>
 
-      {Array.isArray(data.features.faqs) && data.features.faqs.length > 0 && (
-        <FAQs faqs={data.features.faqs as FAQEntry[]} />
+      {Array.isArray(data.faqs) && data.faqs.length > 0 && (
+        <FAQs faqs={data.faqs as FAQEntry[]} />
       )}
+
+      <Testimonials />
     </div>
   );
 };

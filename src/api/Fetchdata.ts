@@ -1,3 +1,8 @@
+export interface TestimonialEntry {
+  name: string;
+  description: string;
+  role?: string;
+}
 export type CurrencyList = string[];
 
 export interface UseCaseItem {
@@ -48,7 +53,11 @@ export interface HomepageData {
   featureTabs: FeatureTabDef[];
   features: {
     [key: string]: FeatureItem[] | FAQEntry[];
-    faqs: FAQEntry[];
+  };
+  faqs: FAQEntry[];
+  testimonials: {
+    individuals: TestimonialEntry[];
+    businesses: TestimonialEntry[];
   };
 }
 

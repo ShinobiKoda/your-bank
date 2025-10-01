@@ -72,7 +72,7 @@ const FAQs = ({
         if (next.has(idx)) {
           next.delete(idx);
         } else {
-          next.add(idx);
+          next.add(idx);  
         }
         return next;
       });
