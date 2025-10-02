@@ -113,18 +113,18 @@ export const fadeInDown: Variants = {
 };
 
 // Features section specific animations
-export const featuresContainer:Variants = {
-  hidden: { opacity: 0, y: 20 },   // starting position
+export const featuresContainer: Variants = {
+  hidden: { opacity: 0, y: 20 }, // starting position
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, staggerChildren: 0.1 }
+    transition: { duration: 0.5, staggerChildren: 0.1 },
   },
   exit: {
     opacity: 0,
-    y: -20,  // slight slide up when leaving
-    transition: { duration: 0.3 }
-  }
+    y: -20, // slight slide up when leaving
+    transition: { duration: 0.3 },
+  },
 };
 
 export const featureTabsContainer: Variants = {
@@ -175,7 +175,7 @@ export const featureHighlight: Variants = {
   exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
 };
 
-export const featuresSection:Variants = {
+export const featuresSection: Variants = {
   hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
@@ -185,7 +185,7 @@ export const featuresSection:Variants = {
 };
 
 // grid-level variants (inner)
-export const featureGrid:Variants = {
+export const featureGrid: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
@@ -193,4 +193,83 @@ export const featureGrid:Variants = {
     transition: { staggerChildren: 0.08 },
   },
   exit: { opacity: 0, y: -20, transition: { duration: 0.28 } },
+};
+
+// --------------------
+// Footer specific variants
+// --------------------
+export const footerContainer: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.14,
+    },
+  },
+};
+
+export const footerItem: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
+
+export const footerSocialIcon: Variants = {
+  hidden: { opacity: 0, scale: 0.6, y: 10 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 260, damping: 18 },
+  },
+  hover: {
+    scale: 1.1,
+    rotate: 3,
+    transition: { type: "spring", stiffness: 300, damping: 14 },
+  },
+  tap: { scale: 0.95 },
+};
+
+export const footerDivider: Variants = {
+  hidden: { scaleX: 0, opacity: 0 },
+  visible: {
+    scaleX: 1,
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+export const footerLegalBar: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut", staggerChildren: 0.12 },
+  },
+};
+
+export const footerLegalItem: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: "easeOut" },
+  },
+};
+
+export const footerSocialRow: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
 };
