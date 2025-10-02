@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <footer className="w-full mt-[80px] lg:mt-[120px] 2xl:mt-[150px] bg-[var(--grey-11)]">
       <div className="w-full max-w-[1596px] mx-auto lg:px-[80px] 2xl:px-[162px] px-4 pb-[30px] pt-[50px]">
-        <div className="space-y-6">
+        <div className="space-y-6 lg:space-y-[40px]">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -23,7 +23,10 @@ const Footer = () => {
               alt="Logo Image"
               className="w-[34px] h-[34px]"
             />
-            <motion.h3 variants={staggerItem} className="font-semibold text-lg">
+            <motion.h3
+              variants={staggerItem}
+              className="font-semibold text-lg lg:text-2xl"
+            >
               YourBank
             </motion.h3>
           </motion.div>
@@ -32,7 +35,7 @@ const Footer = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.3 }}
-            className="w-full flex items-center justify-center font-normal text-sm gap-3.5 text-white"
+            className="w-full flex items-center justify-center font-normal text-sm lg:text-base gap-3.5 text-white"
           >
             <motion.button variants={staggerItem}>
               <Link to={"/"} className="cursor-pointer">
@@ -51,26 +54,26 @@ const Footer = () => {
           </motion.div>
         </div>
 
-        <hr className="w-full my-[30px] text-[var(--grey-15)]" />
+        <hr className="w-full my-[30px] lg:my-10 text-[var(--grey-15)]" />
 
         <div className="flex flex-wrap items-center gap-5 justify-center">
-          <p className="flex items-center gap-px font-normal text-sm">
+          <p className="flex items-center gap-px font-normal text-sm lg:text-base">
             <IoMdMail size={20} className="text-[var(--green-60)]" />
             <span>sirp2804@gmail.com</span>
           </p>
-          <p className="flex items-center gap-px font-normal text-sm">
+          <p className="flex items-center gap-px font-normal text-sm lg:text-base">
             <FaPhoneAlt size={20} className="text-[var(--green-60)]" />
             <span>+234 8146 799 964</span>
           </p>
-          <p className="flex items-center gap-px font-normal text-sm">
+          <p className="flex items-center gap-px font-normal text-sm lg:text-base">
             <FaLocationDot size={20} className="text-[var(--green-60)]" />
             <span>Akure, Ondo State</span>
           </p>
         </div>
 
-        <hr className="w-full my-[30px] text-[var(--grey-15)]" />
+        <hr className="w-full my-[30px] lg:my-10 text-[var(--grey-15)]" />
 
-        <div className="w-full relative min-h-[162px] pt-5">
+        <div className="w-full relative min-h-[162px] pt-5 lg:hidden">
           <div className="bg-[var(--grey-10)] pl-3 pr-6 pt-[50px] pb-[30px] border border-[var(--grey-15)] rounded-xl w-full flex flex-col items-center justify-center gap-5">
             <div className="flex items-center gap-2 absolute -top-1">
               <Link
@@ -99,6 +102,35 @@ const Footer = () => {
               Privacy Policy | Terms of Service
             </p>
           </div>
+        </div>
+
+        <div className="hidden lg:flex w-full items-center justify-between bg-[var(--grey-10)] border border-[var(--grey-15)] pl-3 pr-6 py-3 rounded-[100px]">
+          <div className="flex items-center gap-2">
+            <Link
+              to="/"
+              className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center"
+            >
+              <IoLogoWhatsapp size={25} className="text-[var(--grey-15)]" />
+            </Link>
+            <Link
+              to="/"
+              className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center"
+            >
+              <FaTwitter size={25} className="text-[var(--grey-15)]" />
+            </Link>
+            <Link
+              to="/"
+              className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center"
+            >
+              <FaLinkedin size={25} className="text-[var(--grey-15)]" />
+            </Link>
+          </div>
+          <p className="font-light text-sm text-[var(--grey-70)]">
+            YourBank All Rights Reserved
+          </p>
+          <p className="font-light text-sm text-[var(--grey-70)]">
+            Privacy Policy | Terms of Service
+          </p>
         </div>
       </div>
     </footer>
