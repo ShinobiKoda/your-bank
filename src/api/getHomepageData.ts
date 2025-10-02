@@ -66,7 +66,7 @@ let cache: HomepageData | null = null;
 export async function fetchHomepageData(): Promise<HomepageData> {
   if (cache) return cache;
   try {
-    const res = await fetch("/data.json", { cache: "no-store" });
+    const res = await fetch("/data/homepage.json", { cache: "no-store" });
     if (!res.ok) throw new Error(`Failed to load data.json (${res.status})`);
     const data = (await res.json()) as HomepageData;
     cache = data;

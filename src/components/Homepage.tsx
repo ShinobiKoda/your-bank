@@ -19,17 +19,18 @@ import {
   fetchHomepageData,
   type HomepageData,
   type FAQEntry,
-} from "../api/Fetchdata";
-import type { FeatureItem } from "../api/Fetchdata";
+} from "../api/getHomepageData";
+import type { FeatureItem } from "../api/getHomepageData";
 import FAQs from "./FAQs";
 import Testimonials from "./Testimonials";
+
+let introBlurHasPlayed = false;
 
 const Homepage = () => {
   const [data, setData] = useState<HomepageData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  // Intro blur/overlay state – shows a brief blur effect before normal animations
-  const [showIntroBlur, setShowIntroBlur] = useState(true);
+  const [showIntroBlur, setShowIntroBlur] = useState(() => !introBlurHasPlayed);
 
   useEffect(() => {
     let mounted = true;
@@ -91,7 +92,10 @@ const Homepage = () => {
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-          onAnimationComplete={() => setShowIntroBlur(false)}
+          onAnimationComplete={() => {
+            setShowIntroBlur(false);
+            introBlurHasPlayed = true; // mark as played so it won't show again this session
+          }}
           className="fixed inset-0 z-[60] pointer-events-none"
           aria-hidden
         >

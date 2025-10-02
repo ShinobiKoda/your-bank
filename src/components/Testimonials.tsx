@@ -2,7 +2,10 @@ import { motion, type PanInfo } from "motion/react";
 import { staggerContainer, staggerItem } from "./animations/motion";
 import { useState, useEffect, useRef } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import { fetchHomepageData, type TestimonialEntry } from "../api/Fetchdata";
+import {
+  fetchHomepageData,
+  type TestimonialEntry,
+} from "../api/getHomepageData";
 
 interface TestimonialCardProps {
   item: TestimonialEntry;
@@ -220,7 +223,10 @@ const Testimonials = () => {
                              bg-[var(--grey-11)] border border-[var(--grey-15)] 
                              hover:border-[var(--green-60)]/60 transition-colors"
                 >
-                  <FaArrowLeftLong className="text-[var(--green-60)]" size={25} />
+                  <FaArrowLeftLong
+                    className="text-[var(--green-60)]"
+                    size={25}
+                  />
                 </button>
 
                 <button
@@ -232,7 +238,10 @@ const Testimonials = () => {
                              bg-[var(--grey-11)] border border-[var(--grey-15)] 
                              hover:border-[var(--green-60)]/60 transition-colors"
                 >
-                  <FaArrowRightLong className="text-[var(--green-60)]" size={25} />
+                  <FaArrowRightLong
+                    className="text-[var(--green-60)]"
+                    size={25}
+                  />
                 </button>
 
                 <div className="flex lg:hidden items-center gap-1 mt-[30px] justify-center">
