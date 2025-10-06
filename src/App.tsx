@@ -5,7 +5,7 @@ import Securitypage from "./components/Securitypage";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Navbar from "./components/layout/Navbar";
-// import Footer from "./components/layout/Footer"
+import Footer from "./components/layout/Footer"
 
 import { Routes, Route } from "react-router-dom";
 
@@ -21,7 +21,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

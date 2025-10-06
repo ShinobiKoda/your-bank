@@ -1,16 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 @import "tailwindcss";
 
-:root{
-  --green-60: #CAFF33;
-  --grey-70: #B3B3B3;
-  --grey-10: #1A1A1A;
-  --grey-11: #1C1C1C;
+:root {
+  --green-60: #caff33;
+  --grey-70: #b3b3b3;
+  --grey-10: #1a1a1a;
+  --grey-11: #1c1c1c;
   --grey-15: #262626;
+  --grey-30: #4c4c4d;
+  --custom-gradient: linear-gradient(
+      106.061deg,
+      rgba(202, 255, 51, 0.05) 0%,
+      rgba(202, 255, 51, 0) 81%
+    ),
+    linear-gradient(-92.503deg, #1c1c1c 41%, rgba(28, 28, 28, 0) 100%);
 }
 
-body{
-  background-color: #1A1A1A;
+body {
+  background-color: #1a1a1a;
   color: white;
   font-family: "Lexend", sans-serif;
 }

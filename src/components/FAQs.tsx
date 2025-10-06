@@ -3,50 +3,42 @@ import { motion, AnimatePresence } from "motion/react";
 import { GoChevronDown } from "react-icons/go";
 import { staggerContainer, staggerItem } from "./animations/motion";
 
-export interface FAQItem {
-  q: string;
-  a: string;
-}
+const FAQS_DATA_URL = "/data/homepage.json";
 
-interface FAQsProps {
-  faqs?: FAQItem[];
-  initiallyOpen?: number | number[];
-  allowMultiple?: boolean;
-  desktopMulti?: boolean;
-  breakpointPx?: number;
-}
-
-const FAQs = ({
-  faqs = [],
-  initiallyOpen = 0,
-  allowMultiple = false,
-  desktopMulti = true,
-  breakpointPx = 1024,
-}: FAQsProps) => {
+const FAQs = () => {
+  const [faqs, setFaqs] = useState<{ q: string; a: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set([0]));
+  const [singleOpen, setSingleOpen] = useState<number | null>(0);
 
+  // Fetch FAQ data from the homepage.json file
   useEffect(() => {
+    fetch(FAQS_DATA_URL)
+      .then((res) => res.json())
+      .then((data) => {
+        setFaqs(Array.isArray(data.faqs) ? data.faqs : []);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError("Failed to load FAQs");
+        setLoading(false);
+      });
+  }, []);
+
+  // Responsive: detect desktop
+  useEffect(() => {
+    const breakpointPx = 1024;
     const mq = window.matchMedia(`(min-width: ${breakpointPx}px)`);
     const update = () => setIsDesktop(mq.matches);
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
-  }, [breakpointPx]);
+  }, []);
 
-  const multiEnabled = allowMultiple || (desktopMulti && isDesktop);
-
-  const initialSet = new Set<number>(
-    Array.isArray(initiallyOpen) ? initiallyOpen : [initiallyOpen]
-  );
-  const [openItems, setOpenItems] = useState<Set<number>>(initialSet);
-  const [singleOpen, setSingleOpen] = useState<number | null>(
-    !multiEnabled
-      ? Array.isArray(initiallyOpen)
-        ? initiallyOpen[0] ?? null
-        : initiallyOpen
-      : null
-  );
+  const multiEnabled = isDesktop;
 
   useEffect(() => {
     if (multiEnabled) {
@@ -57,9 +49,22 @@ const FAQs = ({
       const first = openItems.values().next().value ?? null;
       setSingleOpen(first);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [multiEnabled]);
+  }, [multiEnabled, openItems, singleOpen]);
 
+  if (loading) {
+    return (
+      <div className="w-full flex items-center justify-center py-40">
+        <p className="text-sm text-[var(--green-60)]">Loading FAQs...</p>
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="w-full flex items-center justify-center py-40">
+        <p className="text-sm text-red-400">{error}</p>
+      </div>
+    );
+  }
   if (!faqs.length) return null;
 
   const isOpen = (idx: number) =>
@@ -72,7 +77,7 @@ const FAQs = ({
         if (next.has(idx)) {
           next.delete(idx);
         } else {
-          next.add(idx);  
+          next.add(idx);
         }
         return next;
       });
@@ -88,15 +93,25 @@ const FAQs = ({
       className="mt-[80px] w-full px-4 lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto lg:mt-[120px] 2xl:mt-[150px]"
       aria-labelledby="faq-heading"
     >
-      <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{once: false, amount: 0.3}} className="mb-[50px] space-y-2.5">
-        <motion.h2 variants={staggerItem}
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        className="mb-[50px] space-y-2.5"
+      >
+        <motion.h2
+          variants={staggerItem}
           id="faq-heading"
           className="font-medium text-[28px] lg:text-[38px] text-center lg:text-left"
         >
           <span className="text-[var(--green-60)]">Frequently</span> Asked
           Questions
         </motion.h2>
-        <motion.p variants={staggerItem} className="font-light text-sm lg:text-base text-[var(--grey-70)] text-center lg:text-left">
+        <motion.p
+          variants={staggerItem}
+          className="font-light text-sm lg:text-base text-[var(--grey-70)] text-center lg:text-left"
+        >
           Still have any questions? Contact our team via
           <span className="text-[var(--green-60)]"> support@yourbank.com</span>
         </motion.p>

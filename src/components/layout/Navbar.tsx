@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { motion } from "motion/react";
+import { useEffect } from "react";
+
 import {
   staggerContainer,
   staggerItem,
@@ -36,9 +38,23 @@ const links = [
 ];
 
 const Navbar = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen((prev) => !prev);
-  const [activeLink, setActiveLink] = useState("home");
+  const pathToId: Record<string, string> = {
+    "/": "home",
+    "/careers": "careers",
+    "/about": "about",
+    "/security": "security",
+    "/login": "login",
+    "/signup": "signup",
+  };
+  const currentId = pathToId[location.pathname] || "home";
+  const [activeLink, setActiveLink] = useState(currentId);
+
+  useEffect(() => {
+    setActiveLink(currentId);
+  }, [currentId]);
 
   return (
     <nav className="w-full px-4 pt-10 lg:pt-[30px] lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
