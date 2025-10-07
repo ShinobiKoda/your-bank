@@ -1,7 +1,29 @@
 import { motion } from "motion/react";
 import { fadeInUp, fadeInLeft, fadeInRight } from "./animations/motion";
+import { useState, useEffect } from "react";
+import {
+  fetchAboutpageData,
+  type AboutpageData,
+} from "../api/getAboutpageData";
 
 const Aboutpage = () => {
+  const [data, setData] = useState<AboutpageData | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const d = await fetchAboutpageData();
+        if (mounted) setData(d);
+      } catch {
+        // ignore error for now
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div className="w-full">
       <section className="w-full mt-[30px] lg:mt-[50px] max-w-[1596px] mx-auto px-4 lg:px-[80px] 2xl:mt-[53px] 2xl:px-[162px]">
@@ -145,6 +167,38 @@ const Aboutpage = () => {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="w-full mt-[80px] lg:mt-[120px] 2xl:mt-[150px] max-w-[1596px] mx-auto px-4 lg:px-[80px] 2xl:px-[162px]">
+        <div className="text-center lg:text-left space-y-2.5 xl:space-y-3.5">
+          <h2 className="text-[var(--green-60)] font-normal text-[28px] lg:text-[38px] xl:text-[48px]">
+            Press Releases
+          </h2>
+          <p className="text-sm font-light text-[var(--grey-70)] lg:text-base xl:text-lg leading-[150%]">
+            Stay updated with the latest happenings and exciting developments at
+            YourBank through our press releases.
+          </p>
+        </div>
+        <div className="mt-[40px] lg:mt-[60px] xl:mt-[80px] grid grid-cols-1 gap-5 lg:grid-cols-2 xl:gap-[30px]">
+          {data?.press_releases.map((release, index) => (
+            <div
+              key={index}
+              className="w-full p-5 rounded-t-[40px] rounded-b-[16px] bg-[var(--grey-11)] border border-[var(--grey-15)]"
+            >
+              <img src={release.image} alt="Press Release Image" className="w-full"/>
+              <h4 className="mt-[30px] font-normal text-lg lg:text-xl xl:text-2xl">{release.title}</h4>
+              <div className="flex items-center flex-wrap gap-1.5 mt-2.5 font-light text-sm text-[var(--grey-70)] lg:text-base xl:text-lg">
+                <div className="px-3 py-1.5 rounded-[68px] bg-[var(--grey-10)] border border-[var(--grey-15)] flex items-center justify-center">
+                  Location: {release.location}
+                </div>
+                <div className="px-3 py-1.5 rounded-[68px] bg-[var(--grey-10)] border border-[var(--grey-15)] flex items-center justify-center">
+                  Data: {release.date}
+                </div>
+              </div>
+              <p className="mt-6 font-light text-sm lg:text-base xl:text-lg text-[var(--grey-70)]">{release.description}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>
