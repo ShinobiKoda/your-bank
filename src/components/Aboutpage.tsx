@@ -1,5 +1,11 @@
 import { motion } from "motion/react";
-import { fadeInUp, fadeInLeft, fadeInRight } from "./animations/motion";
+import {
+  fadeInUp,
+  fadeInLeft,
+  fadeInRight,
+  staggerContainer,
+  staggerItem,
+} from "./animations/motion";
 import { useState, useEffect } from "react";
 import {
   fetchAboutpageData,
@@ -107,7 +113,13 @@ const Aboutpage = () => {
       </section>
 
       <section className="w-full mt-[80px] lg:mt-[120px] 2xl:mt-[150px] max-w-[1596px] mx-auto px-4 lg:px-[80px] 2xl:px-[162px]">
-        <div className="text-center lg:text-left space-y-2.5 xl:space-y-3.5">
+        <motion.div
+          className="text-center lg:text-left space-y-2.5 xl:space-y-3.5"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <h2 className="text-[var(--green-60)] font-normal text-[28px] lg:text-[38px] xl:text-[48px]">
             Mission & Vision
           </h2>
@@ -117,17 +129,32 @@ const Aboutpage = () => {
             financial future for individuals and businesses while maintaining a
             strong commitment to customer satisfaction and community development
           </p>
-        </div>
-        <div className="w-full mt-[60px] flex flex-col gap-[50px]">
-          <div className="w-full flex flex-col gap-[30px] lg:flex-row items-center lg:gap-0">
-            <div className="w-full max-w-[500px] flex items-center justify-center mx-auto">
+        </motion.div>
+        <motion.div
+          className="w-full mt-[60px] flex flex-col gap-[50px]"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+        >
+          <motion.div
+            className="w-full flex flex-col gap-[30px] lg:flex-row items-center lg:gap-0"
+            variants={staggerItem}
+          >
+            <motion.div
+              className="w-full max-w-[500px] flex items-center justify-center mx-auto"
+              variants={fadeInLeft}
+            >
               <img
                 src="/images/mission-img.svg"
                 alt="Mission Image"
                 className="w-full"
               />
-            </div>
-            <div className="text-center space-y-2.5 max-w-[735px] lg:pl-[40px] lg:text-left lg:border-l border-[var(--green-60)]">
+            </motion.div>
+            <motion.div
+              className="text-center space-y-2.5 max-w-[735px] lg:pl-[40px] lg:text-left lg:border-l border-[var(--green-60)]"
+              variants={fadeInUp}
+            >
               <h3 className="font-medium text-[26px] lg:text-[32px] xl:text-[38px]">
                 Mission
               </h3>
@@ -141,17 +168,26 @@ const Aboutpage = () => {
                 helping them navigate their financial journey and realize their
                 dreams.
               </p>
-            </div>
-          </div>
-          <div className="w-full flex flex-col gap-[30px] lg:flex-row-reverse items-center lg:gap-0">
-            <div className="w-full max-w-[500px] flex items-center justify-center mx-auto">
+            </motion.div>
+          </motion.div>
+          <motion.div
+            className="w-full flex flex-col gap-[30px] lg:flex-row-reverse items-center lg:gap-0"
+            variants={staggerItem}
+          >
+            <motion.div
+              className="w-full max-w-[500px] flex items-center justify-center mx-auto"
+              variants={fadeInRight}
+            >
               <img
                 src="/images/vision-img.svg"
                 alt="Mission Image"
                 className="w-full"
               />
-            </div>
-            <div className="text-center space-y-2.5 max-w-[735px] lg:pr-[40px] lg:text-left lg:border-r border-[var(--green-60)]">
+            </motion.div>
+            <motion.div
+              className="text-center space-y-2.5 max-w-[735px] lg:pr-[40px] lg:text-left lg:border-r border-[var(--green-60)]"
+              variants={fadeInUp}
+            >
               <h3 className="font-medium text-[26px] lg:text-[32px] xl:text-[38px]">
                 Mission
               </h3>
@@ -165,13 +201,19 @@ const Aboutpage = () => {
                 helping them navigate their financial journey and realize their
                 dreams.
               </p>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
       <section className="w-full mt-[80px] lg:mt-[120px] 2xl:mt-[150px] max-w-[1596px] mx-auto px-4 lg:px-[80px] 2xl:px-[162px]">
-        <div className="text-center lg:text-left space-y-2.5 xl:space-y-3.5">
+        <motion.div
+          className="text-center lg:text-left space-y-2.5 xl:space-y-3.5"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <h2 className="text-[var(--green-60)] font-normal text-[28px] lg:text-[38px] xl:text-[48px]">
             Press Releases
           </h2>
@@ -179,15 +221,28 @@ const Aboutpage = () => {
             Stay updated with the latest happenings and exciting developments at
             YourBank through our press releases.
           </p>
-        </div>
-        <div className="mt-[40px] lg:mt-[60px] xl:mt-[80px] grid grid-cols-1 gap-5 lg:grid-cols-2 xl:gap-[30px]">
+        </motion.div>
+        <motion.div
+          className="mt-[40px] lg:mt-[60px] xl:mt-[80px] grid grid-cols-1 gap-5 lg:grid-cols-2 xl:gap-[30px]"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+        >
           {data?.press_releases.map((release, index) => (
-            <div
+            <motion.div
               key={index}
               className="w-full p-5 rounded-t-[40px] rounded-b-[16px] bg-[var(--grey-11)] border border-[var(--grey-15)]"
+              variants={staggerItem}
             >
-              <img src={release.image} alt="Press Release Image" className="w-full"/>
-              <h4 className="mt-[30px] font-normal text-lg lg:text-xl xl:text-2xl">{release.title}</h4>
+              <img
+                src={release.image}
+                alt="Press Release Image"
+                className="w-full"
+              />
+              <h4 className="mt-[30px] font-normal text-lg lg:text-xl xl:text-2xl">
+                {release.title}
+              </h4>
               <div className="flex items-center flex-wrap gap-1.5 mt-2.5 font-light text-sm text-[var(--grey-70)] lg:text-base xl:text-lg">
                 <div className="px-3 py-1.5 rounded-[68px] bg-[var(--grey-10)] border border-[var(--grey-15)] flex items-center justify-center">
                   Location: {release.location}
@@ -196,10 +251,12 @@ const Aboutpage = () => {
                   Data: {release.date}
                 </div>
               </div>
-              <p className="mt-6 font-light text-sm lg:text-base xl:text-lg text-[var(--grey-70)]">{release.description}</p>
-            </div>
+              <p className="mt-6 font-light text-sm lg:text-base xl:text-lg text-[var(--grey-70)]">
+                {release.description}
+              </p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
     </div>
   );
