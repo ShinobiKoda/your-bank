@@ -57,7 +57,7 @@ const Navbar = () => {
   }, [currentId]);
 
   return (
-    <nav className="w-full px-4 pt-10 lg:pt-[30px] lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto">
+    <nav className="w-full fixed top-0 left-0 right-0 z-50 px-4 pt-10 lg:pt-[30px] lg:px-[80px] 2xl:px-[162px] max-w-[1596px] mx-auto bg-transparent">
       <motion.div
         variants={staggerContainer}
         initial="hidden"

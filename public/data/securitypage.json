@@ -1,0 +1,29 @@
+{
+  "protection": [
+    {
+      "image": "/images/secure-banking.svg",
+      "title": "Secure Online Banking Platform",
+      "description": "Our online banking platform is built with multiple layers of security to safeguard your information. We utilize industry-standard encryption protocols to ensure that your data remains confidential and protected during transmission."
+    },
+    {
+      "image": "/images/multi-auth.svg",
+      "title": "Multi-Factor Authentication",
+      "description": "To enhance the security of your online banking experience, we employ multi-factor authentication. This additional layer of security requires you to provide multiple pieces of identification, such as a password and a one-time verification code, to access your account."
+    },
+    {
+      "image": "/images/fraud-monitoring.svg",
+      "title": "Fraud Monitoring",
+      "description": "We have sophisticated fraud detection systems in place to monitor your accounts for any suspicious activities. Our dedicated team works around the clock to detect and prevent unauthorized transactions, providing you with peace of mind."
+    },
+    {
+      "image": "/images/activity-alert.svg",
+      "title": "Account Activity Alerts",
+      "description": "Receive instant notifications for any significant account activity, helping you stay informed and quickly respond to potential security threats."
+    },
+    {
+      "image": "/images/secure-banking.svg",
+      "title": "Data Privacy Compliance",
+      "description": "We strictly adhere to data privacy regulations and best practices, ensuring your personal and financial information is handled with the utmost care and confidentiality."
+    }
+  ]
+}
