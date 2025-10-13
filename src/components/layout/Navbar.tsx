@@ -46,7 +46,6 @@ const Navbar = () => {
     "/careers": "careers",
     "/about": "about",
     "/security": "security",
-    "/login": "login",
     "/signup": "signup",
   };
   const currentId = pathToId[location.pathname] || "home";
@@ -111,7 +110,6 @@ const Navbar = () => {
               { id: "careers", label: "Careers", link: "/careers" },
               { id: "about", label: "About", link: "/about" },
               { id: "security", label: "Security", link: "/security" },
-              { id: "login", label: "Login", link: "/login" },
               { id: "signup", label: "Signup", link: "/signup" },
             ].map((item) => (
               <motion.li
@@ -193,19 +191,11 @@ const Navbar = () => {
           <Link to="/signup">
             <motion.button
               variants={staggerItem}
-              className="font-normal text-sm cursor-pointer"
-            >
-              Sign Up
-            </motion.button>
-          </Link>
-          <Link to="/login">
-            <motion.button
-              variants={staggerItem}
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.98 }}
               className="px-6 py-3 rounded-[82px] bg-[#CAFF33] font-normal text-black text-sm cursor-pointer"
             >
-              Login
+              Sign Up
             </motion.button>
           </Link>
         </div>
