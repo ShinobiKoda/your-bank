@@ -12,7 +12,7 @@ import {
   footerSocialRow,
 } from "../animations/motion";
 import { IoMdMail, IoLogoWhatsapp } from "react-icons/io";
-import { FaPhoneAlt, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaPhoneAlt, FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
 const Footer = () => {
@@ -146,21 +146,49 @@ const Footer = () => {
               viewport={{ once: true, amount: 0.4 }}
               className="flex items-center gap-2 absolute -top-1"
             >
-              {[IoLogoWhatsapp, FaTwitter, FaLinkedin].map((Icon, i) => (
-                <motion.div
-                  key={i}
-                  variants={footerSocialIcon}
-                  whileHover="hover"
-                  whileTap="tap"
+              {/* WhatsApp */}
+              <motion.div
+                variants={footerSocialIcon}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                <a
+                  href="https://wa.me/08146799964"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center shadow-inner shadow-black/20"
                 >
-                  <Link
-                    to="/"
-                    className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center shadow-inner shadow-black/20"
-                  >
-                    <Icon size={25} className="text-[var(--grey-15)]" />
-                  </Link>
-                </motion.div>
-              ))}
+                  <IoLogoWhatsapp size={25} className="text-[var(--grey-15)]" />
+                </a>
+              </motion.div>
+              <motion.div
+                variants={footerSocialIcon}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                <a
+                  href="https://www.facebook.com/share/1A9dRt1Xsa/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center shadow-inner shadow-black/20"
+                >
+                  <FaFacebook size={25} className="text-[var(--grey-15)]" />
+                </a>
+              </motion.div>
+              <motion.div
+                variants={footerSocialIcon}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                <a
+                  href="https://x.com/sirp_xo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center shadow-inner shadow-black/20"
+                >
+                  <FaTwitter size={25} className="text-[var(--grey-15)]" />
+                </a>
+              </motion.div>
             </motion.div>
             <motion.p
               variants={footerLegalItem}
@@ -192,21 +220,48 @@ const Footer = () => {
             viewport={{ once: true, amount: 0.4 }}
             className="flex items-center gap-2"
           >
-            {[IoLogoWhatsapp, FaTwitter, FaLinkedin].map((Icon, i) => (
-              <motion.div
-                key={i}
-                variants={footerSocialIcon}
-                whileHover="hover"
-                whileTap="tap"
+            <motion.div
+              variants={footerSocialIcon}
+              whileHover="hover"
+              whileTap="tap"
+            >
+              <a
+                href="https://wa.me/08146799964"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center shadow-inner shadow-black/20"
               >
-                <Link
-                  to="/"
-                  className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center shadow-inner shadow-black/20"
-                >
-                  <Icon size={25} className="text-[var(--grey-15)]" />
-                </Link>
-              </motion.div>
-            ))}
+                <IoLogoWhatsapp size={25} className="text-[var(--grey-15)]" />
+              </a>
+            </motion.div>
+            <motion.div
+              variants={footerSocialIcon}
+              whileHover="hover"
+              whileTap="tap"
+            >
+              <a
+                href="https://www.facebook.com/share/1A9dRt1Xsa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center shadow-inner shadow-black/20"
+              >
+                <FaFacebook size={25} className="text-[var(--grey-15)]" />
+              </a>
+            </motion.div>
+            <motion.div
+              variants={footerSocialIcon}
+              whileHover="hover"
+              whileTap="tap"
+            >
+              <a
+                href="https://x.com/sirp_xo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[var(--green-60)] w-[44px] h-[44px] rounded-full flex items-center justify-center shadow-inner shadow-black/20"
+              >
+                <FaTwitter size={25} className="text-[var(--grey-15)]" />
+              </a>
+            </motion.div>
           </motion.div>
           <motion.p
             variants={footerLegalItem}

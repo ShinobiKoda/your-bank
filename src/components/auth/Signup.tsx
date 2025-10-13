@@ -65,22 +65,22 @@ const Signup = () => {
       variants={fadeInUp}
     >
       <motion.div
-        className="w-full bg-center bg-cover p-[30px] rounded-2xl"
-        style={{ backgroundImage: "url('/images/auth-bg-mobile.svg')" }}
+        className="w-full bg-center bg-cover p-[30px] rounded-2xl  bg-[url('/images/auth-bg-mobile.svg')]
+    lg:bg-[url('/images/auth-bg.svg')]"
         initial="hidden"
         animate="visible"
         variants={scaleIn}
       >
         <motion.div
-          className="w-full text-center space-y-2.5 mb-[40px]"
+          className="w-full text-center space-y-2.5 mb-[40px] max-w-[664px] mx-auto"
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
         >
-          <h2 className="font-medium text-[28px] text-[var(--green-60)]">
+          <h2 className="font-medium text-[28px] text-[var(--green-60)] lg:text-[38px] xl:text-[48px]">
             Sign Up
           </h2>
-          <p className="font-light text-sm text-[var(--grey-70)]">
+          <p className="font-light text-sm text-[var(--grey-70)] lg:text-base xl:text-lg">
             Join our community today! Create an account to unlock exclusive
             features and personalized experiences.
           </p>
@@ -96,7 +96,7 @@ const Signup = () => {
             <motion.div className="space-y-2" variants={fadeInLeft}>
               <input
                 {...register("firstName")}
-                className="border p-4 w-full font-light text-base rounded-[88px] border-[var(--grey-15)] bg-[var(--grey-10)] text-[var(--grey-35)] outline-none"
+                className="border p-4 w-full font-light text-base lg:text-lg rounded-[88px] border-[var(--grey-15)] bg-[var(--grey-10)] text-[var(--grey-35)] outline-none"
                 placeholder="Enter First Name"
               />
               {errors.firstName && (
@@ -108,7 +108,7 @@ const Signup = () => {
             <motion.div className="space-y-2" variants={fadeInRight}>
               <input
                 {...register("lastName")}
-                className="border p-4 w-full font-light text-base rounded-[88px] border-[var(--grey-15)] bg-[var(--grey-10)] text-[var(--grey-35)] outline-none"
+                className="border p-4 w-full font-light text-base lg:text-lg rounded-[88px] border-[var(--grey-15)] bg-[var(--grey-10)] text-[var(--grey-35)] outline-none"
                 placeholder="Enter Last Name"
               />
               {errors.lastName && (
@@ -120,7 +120,7 @@ const Signup = () => {
             <motion.div className="space-y-2" variants={fadeInLeft}>
               <input
                 {...register("email")}
-                className="border p-4 w-full font-light text-base rounded-[88px] border-[var(--grey-15)] bg-[var(--grey-10)] text-[var(--grey-35)] outline-none"
+                className="border p-4 w-full font-light text-base lg:text-lg rounded-[88px] border-[var(--grey-15)] bg-[var(--grey-10)] text-[var(--grey-35)] outline-none"
                 placeholder="Enter Your Email"
               />
               {errors.email && (
@@ -130,7 +130,7 @@ const Signup = () => {
             <motion.div className="space-y-2" variants={fadeInRight}>
               <input
                 {...register("password")}
-                className="border p-4 w-full font-light text-base rounded-[88px] border-[var(--grey-15)] bg-[var(--grey-10)] text-[var(--grey-35)] outline-none"
+                className="border p-4 w-full font-light text-base lg:text-lg rounded-[88px] border-[var(--grey-15)] bg-[var(--grey-10)] text-[var(--grey-35)] outline-none"
                 placeholder="Enter Your Password"
               />
               {errors.password && (
@@ -144,7 +144,8 @@ const Signup = () => {
             <motion.button
               type="submit"
               disabled={!isValid}
-              className="relative px-6 py-3.5 rounded-[63px] bg-[var(--green-60)] text-[var(--grey-15)] font-normal text-sm w-full max-w-[404px] overflow-hidden"
+              whileHover={{scale: 1.08}}
+              className="relative px-6 py-3.5 rounded-[63px] bg-[var(--green-60)] text-[var(--grey-15)] font-normal text-sm w-full max-w-[404px] overflow-hidden disabled:cursor-not-allowed cursor-pointer"
             >
               <span className={`${isSubmitting ? "opacity-0" : "opacity-100"}`}>
                 Sign Up
@@ -174,13 +175,33 @@ const Signup = () => {
         <div className="w-full max-w-[664px] mx-auto mt-6 space-y-6">
           <div className="w-full flex items-center justify-between max-w-[404px] mx-auto">
             <div className="h-px bg-[var(--grey-70)] w-[28%]"></div>
-            <p className="text-[var(--grey-70)] font-normal text-sm">Or Continue with</p>
+            <p className="text-[var(--grey-70)] font-normal text-sm">
+              Or Continue with
+            </p>
             <div className="h-px bg-[var(--grey-70)] w-[28%]"></div>
           </div>
-          <motion.div variants={staggerContainer} className="w-full max-w-[404px] mx-auto flex items-center justify-center gap-5">
-            <motion.img whileHover={{scale: 1.08}} variants={staggerItem} src="/images/google-auth.svg" alt="" />
-            <motion.img whileHover={{scale: 1.08}} variants={staggerItem} src="/images/facebook-auth.svg" alt="" />
-            <motion.img whileHover={{scale: 1.08}} variants={staggerItem} src="/images/apple-auth.svg" alt="" />
+          <motion.div
+            variants={staggerContainer}
+            className="w-full max-w-[404px] mx-auto flex items-center justify-center gap-5"
+          >
+            <motion.img
+              whileHover={{ scale: 1.08 }}
+              variants={staggerItem}
+              src="/images/google-auth.svg"
+              alt=""
+            />
+            <motion.img
+              whileHover={{ scale: 1.08 }}
+              variants={staggerItem}
+              src="/images/facebook-auth.svg"
+              alt=""
+            />
+            <motion.img
+              whileHover={{ scale: 1.08 }}
+              variants={staggerItem}
+              src="/images/apple-auth.svg"
+              alt=""
+            />
           </motion.div>
         </div>
       </motion.div>
