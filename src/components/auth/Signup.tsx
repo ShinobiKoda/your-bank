@@ -142,14 +142,16 @@ const Signup = () => {
             <motion.button
               type="submit"
               disabled={!isValid}
-              className={`px-6 py-3.5 rounded-[63px] bg-[var(--green-60)] text-[var(--grey-15)] font-normal text-sm w-full max-w-[404px]`}
-              initial="rest"
-              animate="rest"
-              whileHover="hover"
-              variants={{ rest: { scale: 1 }, hover: { scale: 1.05 } }}
-              style={{ transition: "transform 0.2s" }}
+              className="relative px-6 py-3.5 rounded-[63px] bg-[var(--green-60)] text-[var(--grey-15)] font-normal text-sm w-full max-w-[404px] overflow-hidden"
             >
-              {isSubmitting ? <ClipLoader size={30} /> : "Sign Up"}
+              <span className={`${isSubmitting ? "opacity-0" : "opacity-100"}`}>
+                Sign Up
+              </span>
+              {isSubmitting && (
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <ClipLoader size={20} color="var(--grey-15)" />
+                </span>
+              )}
             </motion.button>
           </div>
         </motion.form>
