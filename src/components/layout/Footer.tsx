@@ -12,6 +12,7 @@ import {
   footerSocialRow,
 } from "../animations/motion";
 import { IoMdMail, IoLogoWhatsapp } from "react-icons/io";
+import { FaPhoneAlt, FaTwitter,  FaFacebook } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
 const Footer = () => {
