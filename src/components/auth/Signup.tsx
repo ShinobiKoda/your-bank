@@ -9,6 +9,8 @@ import {
   scaleIn,
   fadeInLeft,
   fadeInRight,
+  staggerContainer,
+  staggerItem,
 } from "../animations/motion";
 
 const schema = z.object({
@@ -168,6 +170,19 @@ const Signup = () => {
             </motion.p>
           )}
         </AnimatePresence>
+
+        <div className="w-full max-w-[664px] mx-auto mt-6 space-y-6">
+          <div className="w-full flex items-center justify-between max-w-[404px] mx-auto">
+            <div className="h-px bg-[var(--grey-70)] w-[28%]"></div>
+            <p className="text-[var(--grey-70)] font-normal text-sm">Or Continue with</p>
+            <div className="h-px bg-[var(--grey-70)] w-[28%]"></div>
+          </div>
+          <motion.div variants={staggerContainer} className="w-full max-w-[404px] mx-auto flex items-center justify-center gap-5">
+            <motion.img whileHover={{scale: 1.08}} variants={staggerItem} src="/images/google-auth.svg" alt="" />
+            <motion.img whileHover={{scale: 1.08}} variants={staggerItem} src="/images/facebook-auth.svg" alt="" />
+            <motion.img whileHover={{scale: 1.08}} variants={staggerItem} src="/images/apple-auth.svg" alt="" />
+          </motion.div>
+        </div>
       </motion.div>
     </motion.div>
   );
